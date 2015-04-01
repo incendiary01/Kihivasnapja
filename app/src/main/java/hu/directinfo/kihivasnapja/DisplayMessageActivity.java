@@ -16,14 +16,14 @@ public class DisplayMessageActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
 
         Intent intent = getIntent();
-        String message = intent.getStringExtra(MyActivity.EXTRA_MESSAGE);
+        /*String message = intent.getStringExtra(MyActivity.EXTRA_MESSAGE);*/
 
-        TextView textView = new TextView(this);
+        /*TextView textView = new TextView(this);
 
         textView.setTextSize(40);
         textView.setText(message);
 
-        setContentView(textView);
+        setContentView(textView)*/;
     }
 
 

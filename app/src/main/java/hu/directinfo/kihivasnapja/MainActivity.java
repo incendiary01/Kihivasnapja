@@ -72,22 +72,18 @@ public class MainActivity extends ActionBarActivity {
         /*mActionBar.setDisplayShowHomeEnabled(false);
         mActionBar.setDisplayShowTitleEnabled(false);
         LayoutInflater mInflater = LayoutInflater.from(this);
-
         View mCustomView = mInflater.inflate(R.layout.custom_actionbar, null);
         TextView mTitleTextView = (TextView) mCustomView.findViewById(R.id.title_text);
         mTitleTextView.setText("My Own Title");
-
         ImageButton imageButton = (ImageButton) mCustomView
                 .findViewById(R.id.imageButton);
         imageButton.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View view) {
                 Toast.makeText(getApplicationContext(), "Refresh Clicked!",
                         Toast.LENGTH_LONG).show();
             }
         });
-
         mActionBar.setCustomView(mCustomView);
         mActionBar.setDisplayShowCustomEnabled(true);*/
     }
@@ -140,5 +136,3 @@ public class MainActivity extends ActionBarActivity {
 
     }
 }
-
-
