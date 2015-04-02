@@ -7,13 +7,13 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <ImageView
+   <!-- <ImageView
         android:id="@+id/imageView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:padding="20dp"
-        android:src="@drawable/logo_date" />
+        android:src="@drawable/logo_date" />-->
 
     <View
         android:layout_width="fill_parent"

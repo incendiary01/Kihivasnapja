@@ -61,10 +61,10 @@ public class MainActivity extends ActionBarActivity {
         });
 
         android.support.v7.app.ActionBar actionbar = getSupportActionBar();
-        actionbar.hide();
-        /*actionbar.setDisplayShowHomeEnabled(true);
+        /*actionbar.hide();*/
+        actionbar.setDisplayShowHomeEnabled(true);
         actionbar.setDisplayUseLogoEnabled(true);
-        actionbar.setLogo(R.mipmap.ic_launcher);*/
+        actionbar.setLogo(R.mipmap.ic_launcher);
         /*actionbar.setHomeButtonEnabled(true);
         actionbar.setDisplayHomeAsUpEnabled(true);
         actionbar.setDisplayShowTitleEnabled(true);*/
