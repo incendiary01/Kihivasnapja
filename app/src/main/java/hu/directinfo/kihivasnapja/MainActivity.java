@@ -4,16 +4,22 @@ import android.annotation.TargetApi;
 
 import android.app.DialogFragment;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toolbar;
@@ -27,12 +33,14 @@ import java.util.List;
 
 public class MainActivity extends ActionBarActivity {
 
+    private AutoCompleteTextView cityAutoComplete;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        fillUpAutocomplete1();
+        fillUpAutocomplete();
 
 
         /*final ArrayList<String> list = new ArrayList<>();
@@ -116,7 +124,7 @@ public class MainActivity extends ActionBarActivity {
         });*/
     }
 
-    public void fillUpAutocomplete1() {
+    public void fillUpAutocomplete() {
 
         // Get the list of cities
         String[] cities = getResources().getStringArray(R.array.list_of_cities);
@@ -126,32 +134,109 @@ public class MainActivity extends ActionBarActivity {
                 new ArrayAdapter(this,android.R.layout.simple_list_item_1,cities);
 
         // Get a reference on AutoCompleteTextView
-        AutoCompleteTextView cityAutoComplete = (AutoCompleteTextView) findViewById(R.id.cityAutoComplete);
+        cityAutoComplete = (AutoCompleteTextView) findViewById(R.id.cityAutoComplete);
 
         // Set the data
         cityAutoComplete.setAdapter(cities_adapter);
 
-        // Create onchange event
-        cityAutoComplete.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        // Set other event listener
+        cityAutoComplete.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if(checkIfResourceExist(s)) {
+                    enableSchoolSpinner(s,cityAutoComplete);
+                }
+                else
+                {
+                    disableSchoolSpinner();
+                    disableForwardButton();
+                }
+            }
+        });
+
+
+        /*cityAutoComplete.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+
+                Log.e("keyCode", "Value: " + keyCode);
+
+                if (keyCode == KeyEvent.KEYCODE_DEL) {
+                    Log.d("keyCode", "Value: " + keyCode);
+                    disableSchoolSpinner();
+                    disableForwardButton();
+                }
+                return false;
+            }
+        });*/
+
+        // Set event listener
+        /*cityAutoComplete.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 final String item = (String) parent.getItemAtPosition(position);
                 enableSchoolSpinner(item);
             }
-        });
+        });*/
+
+
     }
 
-    /**
-     * Miután kiválasztottuk a várost, meghívjuk ezt a függvényt.
-     * A kiválaszott város nevéből eltávolítjuk az ékezeteket.
-     * Az új város névvel megkeressük a hozzá tartozó iskolák tömbjét
-     * és betöltjük a schoolSpinnerbe az adatokat.
-     * @param item
-     */
-    public void enableSchoolSpinner(String item) {
+    public void disableSchoolSpinner() {
+
+        // Spinner reference
+        Spinner spinner = (Spinner) findViewById(R.id.schoolSpinner);
+
+        // Disable spinner
+        spinner.setEnabled(false);
+
+        // Remove data from spinner
+        spinner.setAdapter(null);
+
+    }
+
+    public void disableForwardButton() {
+
+        // Button reference
+        Button button = (Button) findViewById(R.id.registerForward);
+
+        // Disable Button
+        button.setEnabled(false);
+    }
+
+    public boolean checkIfResourceExist(Editable s) {
 
         // Normalize string
-        String city = flattenToAscii(item);
+        String city = flattenToAscii(s.toString());
+
+        // Spinner reference
+        Spinner spinner = (Spinner) findViewById(R.id.schoolSpinner);
+
+        // Get the array dynamically
+        int getRes = getResources().getIdentifier(city, "array", getPackageName());
+        if (getRes != 0) {
+            return true;
+        }
+        return false;
+    }
+
+    public void enableSchoolSpinner(Editable item, AutoCompleteTextView cityAutoComplete) {
+
+        // Hide the keyboard
+        InputMethodManager imm = (InputMethodManager)getSystemService(
+                Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(cityAutoComplete.getWindowToken(), 0);
+
+        // Normalize string
+        String city = flattenToAscii(item.toString());
 
         // Spinner reference
         Spinner spinner = (Spinner) findViewById(R.id.schoolSpinner);
@@ -169,8 +254,31 @@ public class MainActivity extends ActionBarActivity {
 
         // Set adapter
         spinner.setAdapter(schools_adapter);
+
+        // Enable spinner
+        spinner.setEnabled(true);
+
+        // Set event listener
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Button button = (Button) findViewById(R.id.registerForward);
+                button.setEnabled(true);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                // Do nothing
+            }
+        });
     }
 
+    public void proceedToApp(View view) {
+
+        Intent intent = new Intent(this, StartActivity.class);
+        startActivity(intent);
+
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

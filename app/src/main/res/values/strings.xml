@@ -441,5 +441,6 @@
         <item>Kecskemét | Lánchíd Utcai Általános Iskola</item>
         <item>Debrecen | Benedek Elek Általános Iskola</item>
     </string-array>
+    <string name="title_activity_start">StartActivity</string>
 
 </resources>
