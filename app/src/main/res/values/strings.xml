@@ -5,15 +5,441 @@
     <string name="action_settings">Settings</string>
 
     <string-array name="list_of_cities">
-        <item >Sopron</item>
-        <item >Budapest</item>
-        <item >Győr</item>
-        <item >Ajka</item>
-        <item >Pécs</item>
-        <item >Szeged</item>
-        <item >Makó</item>
-        <item >Nyíregyháza</item>
-        <item >Sümeg</item>
+        <item>Sopron</item>
+        <item>Budapest</item>
+        <item>Győr</item>
+        <item>Ajka</item>
+        <item>Pécs</item>
+        <item>Szeged</item>
+        <item>Makó</item>
+        <item>Nyíregyháza</item>
+        <item>Sümeg</item>
+        <item>Baja</item>
+    </string-array>
+
+    <string-array name="Sumeg">
+        <item>Sümeg1</item>
+        <item>Sümeg2</item>
+        <item>Sümeg3</item>
+        <item>Sümeg4</item>
+        <item>Sümeg5</item>
+    </string-array>
+
+    <string-array name="list_of_schools">
+        <item>Baja | Szent László Általános Művelődési Központ Általános Iskolája</item>
+        <item>Baja | Szent László ÁMK Általános Iskolája</item>
+        <item>Hercegszántó | Dózsa György Utcai Óvoda és Általános Iskola</item>
+        <item>Kecskemét | II. Rákóczi Ferenc Általános Iskola</item>
+        <item>Kecskemét | KMI Kodály Zoltán Ének-zenei iskolája</item>
+        <item>Kecskemét | Lánchíd Utcai Általános Iskola</item>
+        <item>Kecskemét | Magyar Ilona Általános Iskola</item>
+        <item>Kecskemét | Nyíri úti EGYMI</item>
+        <item>Kecskemét | Szent Imre Katolikus Óvoda és Általános Iskola, Kecskemét</item>
+        <item>Kerekegyháza | Móra Ferenc Általános Iskola és Alapfokú Művészetoktatási Intézmény</item>
+        <item>Kiskunfélegyháza | Darvas József Általános Iskola</item>
+        <item>Kiskunhalas | Kiskunhalasi Fazekas Mihály Általános Iskola</item>
+        <item>Kiskunhalas | Szent József Katolikus Általános Iskola</item>
+        <item>Kiskunmajsa | Kiskunmajsai Arany János Általános Iskola és Egységes Gyógypedagógiai Módszertani Intézmény</item>
+        <item>Kunfehértó | Kunfehértói Általános Iskola és Napközi Otthon</item>
+        <item>Lajosmizse | Lajosmizsei Fekete István Sportiskolai Általános Iskola</item>
+        <item>Mélykút | Szvetnik Joachim Általános Iskola</item>
+        <item>Szabadszállás | Petőfi Sándor Általános Iskola</item>
+        <item>Tabdi | Tabdi Általános Iskola</item>
+        <item>Tiszaalpár | Árpád Fejedelem Általános Iskola</item>
+        <item>Tiszakécske | Tiszakécskei Református Kollégium Általános Iskolája és Gimnáziuma</item>
+        <item>Bács–Kiskun megye <strong>(aloldal)</strong></item>
+        <item>Dunaszekcső| Dunaszekcsői Általános Iskola</item>
+        <item>Hidas | Benedek Elek Általános Iskola és Óvoda</item>
+        <item>Komló | Baranya Megyei Egységes Gyógypedagógiai Módszertani Intézmény, Óvoda, Általános Iskola, Speciális Szakiskola és Kollégium </item>
+        <item>Komló | Felsőszilvási Általános Iskola</item>
+        <item>Komló | Kenderföld-Somági Általános Iskola és Óvoda</item>
+        <item>Komló | Kodály Zoltán Ének-zenei Katolikus Általános Iskola</item>
+        <item>Komló | Szilvási Általános Iskola</item>
+        <item>Mindszentgodisa | Mindszentgodisai Általános Iskola</item>
+        <item>Mohács | Park Utcai Katolikus Általános Iskola és Óvoda</item>
+        <item>Pécs | Belvárosi Általános Iskola</item>
+        <item>Pécs | Budai - Városkapu Iskola</item>
+        <item>Pécs | Ciszterci Szent Margit Óvoda, Általános Iskola,  Alapfokú Művészeti Iskola és Kollégium</item>
+        <item>Pécs | Éltes Mátyás Iskola</item>
+        <item>Pécs | Mecsekaljai Általános Iskola Jurisics Utcai Általános Iskolája</item>
+        <item>Pécs | Mecsekaljai Általános Iskola Kovács Béla Általános Iskola</item>
+        <item>Pécs | PTE Deák Ferenc Gyakorló Gimnázium és Általános iskola</item>
+        <item>Pécs | Református Kollégium Gimnáziuma és Általános Iskolája</item>
+        <item>Pécs | Városközponti Általános Iskola és Alapfokú Művészeti Iskola</item>
+        <item>Pécs | Városközponti Általános Iskola és Alapfokú Művészetoktatási Intézmény Mátyás Király Utcai Általános Iskolája</item>
+        <item>Szabadszentkirály | Zsigmond Király Általános Iskola és Óvoda</item>
+        <item>Szászvár | Kiss György ÁMK</item>
+        <item>Szigetvár | Istvánffy Miklós Általános Iskola</item>
+        <item>Testvérvárosok Terei Általános Iskola</item>
+        <item>Baranya megye <strong>(aloldal)</strong></item>
+        <item>Békéscsaba | Jankay Tibor Két Tanítási Nyelvű Általános Iskola</item>
+        <item>Békéscsaba | "ESÉLY" Pedagógiai Központ Általános Iskola, Speciális Szakiskola</item>
+        <item>Békéscsaba | Petőfi Utcai Általános Iskola</item>
+        <item>Békés | Dr. Hepp Ferenc Általános Iskola és Alapfokú Művészeti Iskola</item>
+        <item>Gyomaendrőd | Kis Bálint Általános Iskola és Óvoda</item>
+        <item>Gyomaendrőd | Szent Gellért Katolikus Általános Iskola és Óvoda</item>
+        <item>Orosháza | Táncsics Mihály Közoktatási Intézmény és Tehetségközpont - Orosháza</item>
+        <item>Orosháza | Eötvös József  KAtolikus Általános Iskola és Óvoda</item>
+        <item>Orosháza | Orosházi Táncsics Mihály Tehetséggondozó Gimnázium, Szakközépiskola, Általános Iskola és Kollégium, Vörösmarty Mihály Tagintézmény </item>
+        <item>Dombegyház | Balsaráti Vitus János Általános Iskola</item>
+        <item>Szarvas | Szlovák Általános Iskola, Óvoda és Kollégium</item>
+        <item>Gyula | Gyulai Római Katolikus Gimnázium, Általános Iskola, Óvoda és Kollégium</item>
+        <item>Gyula | Magvető Református Általános Iskola és Óvoda</item>
+        <item>Battonya | Battonyai Szent István Általános Iskola</item>
+        <item>Nagyszénás | Nagyszénási Czabán Samu Általános Iskola</item>
+        <item>Gyomaendrőd | Rózsahegyi Kálmán Kistérségi Általános Iskola</item>
+        <item>Tótkomlós | Szlovák Két Tanítási Nyelvű Általános Iskola és Óvoda Tótkomlós</item>
+        <item>Békéssámson | Községi Általános Iskola</item>
+        <item>Békéscsaba | Erzsébethelyi Általános Iskola</item>
+        <item>Békés megye <strong>(aloldal)</strong></item>
+        <item>Arló | Széchenyi István Általános Iskola</item>
+        <item>Bőcs | Körzeti Általános és Zeneiskola, Szakiskola</item>
+        <item> Encs | Zrínyi Ilona Általános Iskola - Encs</item>
+        <item>Erdőhorváth | Körzeti Általános Iskola, Óvoda</item>
+        <item>Kazincbarcika | Ádám Jenő Általános Iskola</item>
+        <item>Kazincbarcika | Dózsa György Úti Általános Iskola</item>
+        <item>Krasznokvajda | Béres Ferenc Általános Iskola és Napközitthonos Óvoda</item>
+        <item>Kurityán | Kossuth Lajos Általános Iskola, Kurityán</item>
+        <item>Mezőkövesd | Szent István Katolikus Általános Iskola</item>
+        <item>Miskolc | 21.SZ. Általános Iskola</item>
+        <item>Miskolc | Bársony János Általános Iskola</item>
+        <item>Miskolc-Diósgyőri Református Általános Iskola</item>
+        <item>Miskolc | Fazekas Utcai Általános Iskola és Zeneiskola</item>
+        <item>Miskolc | Garabonciás Művészeti Iskola - Miskolc</item>
+        <item>Miskolc | Hámori Waldorf Általános Iskola és Gimnázium</item>
+        <item>Miskolc | Herman Ottó Általános Iskola és Munkácsy Mihály Alapfokú Művészetoktatási Intézmény</item>
+        <item>Miskolc | II. Rákóczi Ferenc Általános Iskola</item>
+        <item>Miskolc | Jókai Mór Református Általános Iskola</item>
+        <item>Miskolc | Könyves Kálmán Általános Iskola és Alapfokú Művészetoktatási Intézmény</item>
+        <item>Miskolc | Miskolci Kazinczy Ferenc Magyar - Angol Két Tanítási Nyelvű Általános Iskola</item>
+        <item>Miskolc | Nebuló Általános Iskola</item>
+        <item>Miskolc | Szent Imre Római Katolikus Általános Iskola</item>
+        <item>Ózd | Szabó Lőrinc Általános és Szakképző Iskola</item>
+        <item>Parasznya | Baross Gábor  Körzeti Általános Iskola</item>
+        <item>Sajóecseg | Alternatíva Általános Iskola, Gimnázium és Szakképző Iskola</item>
+        <item>Szendrő | Szendrői Alapfokú Művészetoktatási Intézmény</item>
+        <item>Szerencs | Scholtz Jenõ Zeneiskola</item>
+        <item>Szerencs | Szerencsi Általános Iskola, Alapfokú Mûvészetoktatási Intézmény és Óvoda</item>
+        <item>Taktakenéz | Petőfi Sándor Általános Iskola Bóbita Óvoda és Konyha</item>
+        <item>Zádorfalva | Petőfi Sándor Körzeti Általános Iskola</item>
+        <item>Borsod–Abaúj–Zemplén megye <strong>(aloldal)</strong></item>
+        <item>Mórahalom | Móra Ferenc ÁMK</item>
+        <item>Röszke | Domaszék-Röszke Bálint Sándor Általános Iskola és AMI Röszkei Orbán Dénes Tagiskolája</item>
+        <item>Szeged | Algyői Általános Iskola</item>
+        <item>Szeged | Kossuth Lajos Általános Iskola</item>
+        <item>Szeged | Madách Imre Általános Iskola</item>
+        <item>Szeged | SZTE Ságvári Endre Gyakorló Általános iskola</item>
+        <item>Szeged | Tarjáni Kéttannyelvű Általános Iskola és Alapfokú Művészeti Iskola</item>
+        <item>Szeged | Táltos Tehetséggondozó Általános Iskola,  Gimnázium, Szakképző Iskola és Alapfokú  Művészetoktatási Intézmény</item>
+        <item>Szeged | Tisza-parti Általános Iskola</item>
+        <item>Szeged | Vörösmarty Mihály Általános Iskola</item>
+        <item>Szentes | Deák Ferenc Általános Iskola és Damjanich János Tagiskola</item>
+        <item>Szentes | Klauzál Gábor Általános Iskola</item>
+        <item>2Szentes | Koszta József Általános Iskola</item>
+        <item>Csongrád megye <strong>(aloldal)</strong></item>
+        <item>budapesti általanos iskolák linkjei</item>
+        <item>Nemzeti Erőforrás Minisztérium | Általános iskolák címjegyzéke</item>
+        <item>Miskolci általános iskolák és elérhetőségeik</item>
+        <item>Általános iskola linkjének beküldése, ajánlása</item>
+        <item>Felvidéki magyar iskolák</item>
+        <item>Általános iskolák címjegyzéke <strong>(aloldal)</strong></item>
+        <item>Balkány | Szabolcs Vezér Oktatási Központ</item>
+        <item>Buj | II. Rákóczi Ferenc Általános és Művészeti Iskola, Óvoda, Könyvtár</item>
+        <item>Csenger | "Petőfi Sándor" Általános és Alapfokú Művészeti Iskola, Pedagógiai Szakszolgálat</item>
+        <item>Döge | Ölbey Irén Általános Iskola</item>
+        <item>Hodász | Kölcsey Ferenc Általános Iskola</item>
+        <item>Ibrány | Árpád Fejedelem Általános és Művészeti Iskola</item>
+        <item>Jármi | Kőrösi Csoma Sándor Általános Iskola</item>
+        <item>Kisvárda | Somogyi Rezső Általános Iskola</item>
+        <item>Kisvárda | Vári Emil Általános Iskola </item>
+        <item>Kocsord | Jókai Mór Általános Iskola</item>
+        <item>Mátészalka | Képes Géza Általános Iskola</item>
+        <item>Mátészalka | Széchenyi István Katolikus és Német Nemzetiségi Általános Iskola</item>
+        <item>Nyíregyháza | Apáczai Csere János Gyakorló Általános Iskola</item>
+        <item>Nyíregyháza | Bem József Általános Iskola</item>
+        <item>Nyíregyháza | Evangélikus Általános Iskola</item>
+        <item>Nyíregyháza | Kodály Zoltán Általános Iskola</item>
+        <item>Nyíregyháza | Móricz Zsigmond Általános Iskola</item>
+        <item>Nyíregyháza | Zelk Zoltán Általános Iskola</item>
+        <item>Nyírlugos | Általános Iskola</item>
+        <item>Nyírlugos | Nyírlugosi Általános Iskola</item>
+        <item>Nyírtura | Kazinczy Ferenc Általános Iskola Tagiskolája</item>
+        <item>Ramocsaháza | Nyárády Mihály Általános Iskola és Óvoda</item>
+        <item>Záhony | Árpád Vezér Általános Iskola és Alapfokú Művészetoktatási Intézmény</item>
+        <item>Szabolcs–Szatmár– Bereg megye <strong>(aloldal)</strong></item>
+        <item>Bő | Bői Általános Iskola</item>
+        <item>Felsőszölnök | Kossics József Kétnyelvű Általános Iskola</item>
+        <item>Kőszeg | Dr. Nagy László Egységes Gyógypedagógiai Módszertani Intézmény Kőszeg</item>
+        <item>Nádasd | Nádasdi Széchenyi István Általános Iskola</item>
+        <item>Rábapaty | Rábapatyi Arany János Általános Iskola</item>
+        <item>Sótony | Sótonyi Általános Iskola</item>
+        <item>Szombathely | Dési Huber István Általános Iskola</item>
+        <item>Táplánszentkereszt | Apáczai Csere János Általános Iskola</item>
+        <item>Torony | Toronyi Általános Iskola</item>
+        <item>Vas megye <strong>(aloldal)</strong></item>
+        <item>Borsfa | Fekete István Általános Iskola és Óvoda</item>
+        <item>Keszthely | Egry József Általános és Művészeti Iskola</item>
+        <item>Keszthely | Életfa Általános és Alapfokú Művészeti Iskola</item>
+        <item>Nagykanizsa | Péterfy Sándor Általános Iskola</item>
+        <item>Nagykanizsa | PIARISTA Általános Iskola, Gimnázium, Kollégium  és Boldog Donáti Celesztina Óvoda</item>
+        <item>Tótszentmárton | Szent István Király Általános Iskola</item>
+        <item>Zalaegerszeg | Belvárosi Magyar-Angol Két Tanítási Nyelvű Általános Iskola</item>
+        <item>Zalaegerszeg | Kertvárosi Általános Iskola Liszt Ferenc Tagiskola</item>
+        <item>Zalaegerszeg | Landorhegyi Általános Iskola, Sportiskola</item>
+        <item>Zalaegerszeg | Mindszenty József Általános Iskola, Gimnázium és Kollégium</item>
+        <item>Zalaszentbalázs | Petőfi Sándor Általános Iskola</item>
+        <item>Zalaszentgrót |Deák Ferenc Többcélú Térségi Oktatási Központ</item>
+        <item>Zalaszentiváe | Egervári László Általános Iskola Zalaszentiváni Telephelye</item>
+        <item>Zala megye <strong>(aloldal)</strong></item>
+        <item>Aba | Perkátai Hunyadi Mátyás Általános Iskola és Alapfokú Művészeti Iskola Aba Sámuel Tagiskola</item>
+        <item>Bodajk | Általános Iskola Bodajk</item>
+        <item>Cece | Cecei Általános Iskola</item>
+        <item>Dunaújváros | Arany János Általános Iskola</item>
+        <item>Dunaújváros | Dunaújvárosi Dózsa György Általános Iskola</item>
+        <item>Dunaújváros | Petőfi Sándor Általános Iskola</item>
+        <item>Dunaújváros | Rosti Pál Gimnázium Általános és Szakképző Iskola</item>
+        <item>Enying | Tinódi Lantos Sebestyén Református Általános Iskola</item>
+        <item>Felcsút | Endresz György Általános Iskola, Felcsút</item>
+        <item>Martonvásár | Beethoven Általános Iskola</item>
+        <item>Mezőfalva | Petőfi Sándor Ált. Isk., Szakiskola és AMI</item>
+        <item>Mór | Petőfi Sándor Általános Iskola Mór</item>
+        <item>Polgárdi | Polgárdi Széchenyi István  Általános és Zeneiskola és Dolgozók Gimnáziuma honlapja</item>
+        <item>Rácalmás | Jankovich Miklós Általános Iskola és Alapfokú Művészetoktatási Intézmény</item>
+        <item>Sárkeresztes | Bársony Istvány Általános Iskola</item>
+        <item>Sárosd | Farkas Gyula Általános Iskola</item>
+        <item>Szabadbattyán | Gróf Batthyány Lajos Általános Iskola honlapja</item>
+        <item>Székesfehérvár | Felsővárosi Általános Iskola</item>
+        <item>Székesfehérvár | Kossuth Lajos Általános Iskola</item>
+        <item>Székesfehérvár | Széna Téri Általános Iskola</item>
+        <item>Székesfehérvár | Tolnai Utcai Általános Iskola</item>
+        <item>Székesfehérvár | Vörösmarty Mihály Általános Iskola</item>
+        <item>Székesfehérvár | Zentai Úti Általános Iskola</item>
+        <item>Tordas | Sajnovics János Egyesített Általános Iskola és Alapfokú Művészetoktatási Intézmény, Tordas</item>
+        <item>Velence | Zöldliget Általános Iskola</item>
+        <item>Zichyújfalu | Fekete István Általános Iskola (Zichyújfalu)</item>
+        <item>Fejér megye <strong>(aloldal)</strong></item>
+        <item>Győr | Adyvárosi Móra Ferenc Általános Iskola és Szakközépiskola</item>
+        <item>Győr | Audi Hungaria Nemzetiségi Német-Magyar Általános Iskolai és Gimnáziumi Tagozata, Győr</item>
+        <item>Győr | Fekete István Általános Iskola és Óvoda</item>
+        <item>Győr | Fundamentum Óvoda, Ált.Iskola, Gimnázium és A.M.I.</item>
+        <item>Győr | Kodály Zoltán Általános Iskola</item>
+        <item>Győr | Marcalvárosi Közoktatási Központ</item>
+        <item>Győr | Prohászka Ottokár Orsolyita Közoktatási Központ</item>
+        <item>Mosonmagyaróvár | Bolyai János Általános Iskola, Informatikai és Közgazdasági Szakközépiskola</item>
+        <item>Mosonmagyaróvár | Móra Ferenc Általános Iskola</item>
+        <item>Nagycenk | Széchenyi istván Általános Iskola Nagycenk</item>
+        <item>Sopron | Fenyő Téri Általános Iskola</item>
+        <item>Sopron | Hunyadi János Evangélikus Általános Iskola</item>
+        <item>Zsira | Általános Iskola Zsira</item>
+        <item>Balmazújváros | Balmazújvárosi Református Általános Iskola és Óvoda</item>
+        <item>Debrecen | Benedek Elek Általános Iskola</item>
+        <item>Debrecen | Dr. Kettesy Aladár Általános Iskola és Kollégium, Látássérültek Iskolája</item>
+        <item>Debrecen | Gönczy Pál Általános Iskola</item>
+        <item>Debrecen | Hunyadi János Általános Iskola</item>
+        <item>Debrecen | Huszár Gál Gimnázium Általános Iskola és AMI</item>
+        <item>Debrecen | József Attila Általános Iskola</item>
+        <item>Debrecen | Karácsony Sándor Általános Iskola</item>
+        <item>Debrecen | Kazinczy Ferenc Általános Iskola</item>
+        <item>Debrecen | Petőfi Sándor Általános Iskola</item>
+        <item>Debrecen | Szoboszlói úti Általános Iskola</item>
+        <item>Debrecen | Vénkerti Általános Iskola és AMI</item>
+        <item>Debrecen | Vörösmarty Mihály Általános Iskola és Alapfokú Művészetoktatási Intézmény</item>
+        <item>Hajdúböszörmény | Baltazár Dezső Református Általános Iskola</item>
+        <item>Hajdúböszörmény | Bethlen Gábor Általános Iskola</item>
+        <item>Hajdúszoboszló | Thököly Imre Általános Iskola</item>
+        <item>Mikepércs | Mikepércsi Hunyadi János Általános Iskola</item>
+        <item>Sáránd | Kossuth Lajos Általános Iskola</item>
+        <item>Hajdú-Bihar megye <strong>(aloldal)</strong></item>
+        <item>Domoszló | III. András Általános Iskola</item>
+        <item>Eger | Balassi Bálint Tagiskola</item>
+        <item>Eger | Eszterházy Károly Főiskola Gyakorlóiskola</item>
+        <item>Eger | II.Rákoczi Ferenc Általános Iskola</item>
+        <item>Eger | Szent Imre Katolikus Általános Iskola és Jó Pásztor Óvoda</item>
+        <item>Hatvan | Baross Gábor Általános Iskola</item>
+        <item>Hatvan | Szent István Általános Iskola</item>
+        <item>Heves | Körzeti Általános Iskola Heves</item>
+        <item>Heves | Újtelepi KAtolikus Általános Iskola</item>
+        <item>Hort | Horti Általános Iskola</item>
+        <item>Lõrinci | Hunyadi Mátyás Általános Iskola</item>
+        <item>Poroszló | Vass Lajos Általános Iskola és Napsugár Óvoda</item>
+        <item>Sirok | Országh Kristóf Általános Iskola</item>
+        <item>Vámosgyörk | Vámosgyörki Visontai Kovách László Katolikus Általános Iskola</item>
+        <item>Heves megye <strong>(aloldal)</strong></item>
+        <item>Almásfüzitő | Fekete István Általános Iskola</item>
+        <item>Dorog | Petőfi Sándor Általános Iskola</item>
+        <item>Dorog | Zrínyi Ilona Általános Iskola</item>
+        <item>Eszter­gom | Mindszenty József Katolikus Általános Iskola</item>
+        <item>Esztergom | Montágh Imre Általános Iskola és Speciális Szakiskola</item>
+        <item>Esztergom | Petőfi Sándor Általános Iskola</item>
+        <item>Nyergesújfalu | Kernstok Általános Iskola</item>
+        <item>Oroszlány | József Attila Általános Iskola</item>
+        <item>Tatabánya | Éltes Mátyás Általános Iskola</item>
+        <item>Tatabánya | Herman Ottó Általános Iskola</item>
+        <item>Tatabánya | József Attila Általános Iskola és Alapfokú Művészetoktatási Intézmény</item>
+        <item>Tatabánya | Kertvárosi Általános Iskola Bolyai János Általános Iskolája</item>
+        <item>Tatabánya | Remédium Alapítványi Általános Iskola és Szakiskola</item>
+        <item>Tatabánya | Ságvári E. Ált.Isk. és AMI Tatabánya</item>
+        <item>Tata | Vaszary János Általános Iskola</item>
+        <item>Komárom–Esztergom megye <strong>(aloldal)</strong></item>
+        <item>Balassagyarmat | Rózsavölgyi Márk Művészeti Iskola</item>
+        <item>Keszeg | Alsótagozatos Általános Iskola - Keszeg</item>
+        <item>Salgótarján | Petőfi Sándor Általános Iskola</item>
+        <item>Salgótarján | Salgótarjáni Általános Iskola</item>
+        <item>Salgótarján | Salgótarjáni Általános Iskola Beszterce-lakótelepi Tagiskolája</item>
+        <item>Salgótarján | Salgótarjáni Általános Iskola Kodály Zoltán tagiskolája</item>
+        <item>Salgótarján | Uzoni Péter Gimnázium és Általános Iskola</item>
+        <item>Ságújfalu | Ságújfalui Általános Iskola és Alapfokú Művészeti Iskola</item>
+        <item>Tereske | Óvoda és Általános Iskola Integrációs Bázisintézmény</item>
+        <item>Nógrád megye <strong>(aloldal)</strong></item>
+        <item>Besenyszög | Chiovini Ferenc Általános Iskola, Alapfokú Művészetoktatási Intézmény</item>
+        <item>Jászárokszállás | Széchenyi István Általános Iskola, Óvoda és Zeneiskola</item>
+        <item>Jászberény | Belvárosi Általános Iskola</item>
+        <item>Jászberény | Gróf Apponyi Albert Általános Iskola</item>
+        <item>Jászkisér | Csete Balázs Általános Iskola - Jászkisér és Petőfi Sándor Általános Iskolai Tagintézmény - Pély</item>
+        <item>Karcag | Nagykun Református Általános Iskola</item>
+        <item>Kenderes | Apáczai Csere János Általános Iskola - Kenderes</item>
+        <item>Kunszentmárton | Kunszentmártoni Általános Iskola és Alapfokú Művészeti Iskola</item>
+        <item>Martfű | Martfű József Attila Általános Iskola</item>
+        <item>Mezőtúr | Városi Általános Iskola és Alapfokú Művészetoktatási Intézmény Mezőtúr</item>
+        <item>Szolnok | Belvárosi Általános Iskola</item>
+        <item>Szolnok | Kassai Úti Általános Iskola</item>
+        <item>Szolnok | Kodály Zoltán Ének-zenei Általános Iskola</item>
+        <item>Szolnok | Kőrösi Csoma Sándor Általános Iskola és Konstantin Alapfokú Művészetoktatási Intézmény</item>
+        <item>Szolnok | Szandaszőlősi Általános Iskola</item>
+        <item>Szolnok | Szent-Györgyi Albert Általános Iskola, Szolnok</item>
+        <item>2Szolnok | Szent Tamás Görög Katolikus Általános Iskola</item>
+        <item>Szolnok | Széchenyi Körúti Általános Iskola</item>
+        <item>Tiszaföldvár | Kossuth Lajos Általános Iskola</item>
+        <item>Tiszaföldvár | Papp Bertalan Ószőlői Általános Iskola</item>
+        <item>Tiszafüred | Bán Zsigmond Református Általános Iskola Alapfokú művésztoktatási Intézmény és Óvoda</item>
+        <item>Tiszaörs | Balkay Pál Általános Iskola és Szakiskola honlapja</item>
+        <item>Tiszasas | Tiszasasi Általános Iskola</item>
+        <item>Tószeg | Általános Iskola és Óvoda</item>
+        <item>Túrkeve | Kaszap Nagy István Református Általános Iskola</item>
+        <item>Zagyvarékas | Damjanich János Általános Iskola</item>
+        <item>Jász–Nagykun–Szolnok megye <strong>(aloldal)</strong></item>
+        <item>Balatonfenyves | Fekete István Általános Iskola</item>
+        <item>Balatonlelle | Balatonlellei Általános és Zeneiskola</item>
+        <item>Darány | Körzeti Általános Iskola</item>
+        <item>Hetes | Somssich Imre Általános Iskola Hetes - Somogysárd</item>
+        <item>Kaposfő | Kaposfői Általános Iskola</item>
+        <item>Kaposmérő | Hunyadi János Általános Iskola</item>
+        <item>Kaposvár | II. Rákóczi Ferenc Általános Iskola</item>
+        <item>Kaposvár | Kodály Zoltán Ének-zenei Általános Iskola</item>
+        <item>Kaposvár | Toldi lakótelepi Általános Iskola és Gimnázium</item>
+        <item>Marcali | Noszlopy Gáspár Általános és Alapfokú Művészetoktatási Iskola</item>
+        <item>Nagyberki | Szász Endre Általános Iskola...</item>
+        <item>Somogyjád | Illyés Gyula Általános Iskola és Óvoda</item>
+        <item>Somogyudvarhely | Arany János Általános Iskola és Napközi Otthonos Óvoda</item>
+        <item>Vízvár | BNI DFÁI Szent István Tagintézménye</item>
+        <item>Somogy megye <strong>(aloldal)</strong></item>
+        <item>Abony | Somogyi Imre Általános Iskola</item>
+        <item>Bag | Bagi Arany János Általános Iskola és Alapfokú Művészetoktatási Iskola</item>
+        <item>Budajenő | Budajenői Általános Iskola</item>
+        <item>Budakalász | Szentistvantelepi Általános Iskola</item>
+        <item>Budaörs | Herman Ottó Általános Iskola</item>
+        <item>Budaörs | Kesjár Csaba Általános Iskola és Gimnázium</item>
+        <item>Ceglédbercel | Eötvös József Általános Iskola és Zeneiskola</item>
+        <item>Cegléd | Várkonyi István Általános Iskola</item>
+        <item>Csévharaszt | Balla Károly Általános Iskola</item>
+        <item>Dabas | Kossuth Lajos Általános Iskola</item>
+        <item>Délegyháza | Hunyadi János Általános Iskola</item>
+        <item>Diósd | Eötvös József ÁMK</item>
+        <item>Dunabogdány | Dunabogdányi Általános Iskola és Alapfokú Művészeti Iskola</item>
+        <item>Dunaharaszti | Kőrösi Csoma Sándor Általános Iskola Általános Iskola</item>
+        <item>Dunakeszi | Bárdos Lajos Általános Iskola</item>
+        <item>Dunakeszi | Kőrösi Csoma Sándor Általános Iskola</item>
+        <item>Érd | Hunyadi Mátyás Általános Iskola</item>
+        <item>Farmos | Általános Iskola Farmos</item>
+        <item>Fót | Fóti Ökumenikus Általános Iskola és Gimnázium</item>
+        <item>Fót | Fóti Szabad Waldorf Iskola</item>
+        <item>Fót | Garay János Általános és Szakiskola</item>
+        <item>Fót | Németh Kálmán Általános és Alapfokú Művészeti Iskola</item>
+        <item>Göd | Németh László Általános Iskola</item>
+        <item>Gödöllő | Damjanich János Általános Iskola</item>
+        <item>Gyál | Ady Endre Általános Iskola</item>
+        <item>Gyál | Zrínyi Miklós Általános Iskola</item>
+        <item>Iklad | Német Nemzetiségi Általános Iskola</item>
+        <item>Inárcs | Tolnay Lajos Áltakános Iskola</item>
+        <item>Isaszeg | Gábor Dénes Óvoda, Általános Iskola</item>
+        <item>Kiskunlacháza | Kiskunlacháza-Áporka Általános Iskolai és Egységes Pedagógiai Szakszolgálati Társulás</item>
+        <item>Kóka | Kossuth Lajos Általános Iskola</item>
+        <item>Mogyoród | Szent László Általános Iskola és Pedagógiai Szakszolgálat</item>
+        <item>Monor | Jászai Mari Általános Iskola</item>
+        <item>Monor | Monori Nemzetőr Általános Iskola</item>
+        <item>Nyáregyháza | Nyáry Pál Általános Iskola és AMI</item>
+        <item>Ócsa | Halászy Károly Általános Iskola</item>
+        <item>Pécel | Szemere Pál Általános Iskola</item>
+        <item>Pilisszántó | Pilisszántói Szlovák Nemzetiségi Általános Iskola</item>
+        <item>Pomáz | Sashegyi Sándor  Iskola</item>
+        <item>Rád | II. Rákóczi Ferenc Általános Iskola</item>
+        <item>Százhalombatta | Kőrösi Csoma Sándor Általános és Alapfokú Művészeti Iskola Százhalombatta</item>
+        <item>Szentendre | AGY Tanoda Magyar-Angol Két Tanítási Nyelvű Általános Iskola</item>
+        <item>Szentendre | Szentendrei II.Rákóczi Ferenc Általános Iskola és Gimnázium</item>
+        <item>Szentendre | Templomdombi Általános Iskola</item>
+        <item>Szigetcsép | Váci Mihály Általános Iskola</item>
+        <item>Szigethalom | Szent István Általános Iskola</item>
+        <item>Szigetújfalu | Móra Ferenc Általános Iskola</item>
+        <item>Tápiógyörgye | Kazinczy Ferenc Általános Iskola és Alapfokú Művészetoktatási Intézmény</item>
+        <item>Tápióság | Dr. Papp Károly Általános Iskola</item>
+        <item>Tárnok | II. Rákóczi Ferenc Általános Iskola</item>
+        <item>Törökbálint | Bálint Márton Általános- és Középiskola</item>
+        <item>Törökbálint | Zimándy Ignác Általános Iskola</item>
+        <item>Üröm | József Nádor Általános Iskola</item>
+        <item>Vác | Árpád Fejedelem Általános Iskola</item>
+        <item>Vác | Földváry Károly Általános Iskola</item>
+        <item>Vác | Karolina Katolikus Általános Iskola</item>
+        <item>Vác | Petőfi Sándor Általános Iskola</item>
+        <item>Vác | Radnóti Miklós Álalános Iskola</item>
+        <item>Vác | Waldorf Óvoda és Iskola</item>
+        <item>Vecsés | Grassalkovich Antal Általános Iskola</item>
+        <item>Veresegyház | Fabriczius József Általános Iskola Veresegyház</item>
+        <item>Pest megye <strong>(aloldal)</strong></item>
+        <item>Bonyhád | Bonyhádi Általános Iskola, Gimnázium és Alapfokú Művészeti Iskola</item>
+        <item>Bonyhád | Vörösmarty Mihály Általános Iskola</item>
+        <item>Hőgyész | Hegyhát Általános Iskola és AMI Hunyadi János Tagiskolája</item>
+        <item>Szekszárd | Babits Mihály Általános Iskola</item>
+        <item>Szekszárd | Comenius Általános Iskola</item>
+        <item>Szekszárd | Dienes Valéria Általános Iskola</item>
+        <item>Tolna megye <strong>(aloldal)</strong></item>
+        <item>Balatonkenese | Balatonkenesei Pilinszky János Általános Iskola és Alapfokú Művészeti Iskola</item>
+        <item>Csetény Vámbéry Ármin Általános Iskola</item>
+        <item>Devecser | Gárdonyi Géza Közös Fenntartású Általános Iskola és Alapfokú Művészetoktatási Intézmény</item>
+        <item>Dudar | Német Nemzetiségi Általános Iskola</item>
+        <item>Olaszfalu | Villax Ferdinánd Általános Iskola</item>
+        <item>Öskü | Tasner Antal Általános Iskola </item>
+        <item>Pápa | Pápai Erkel Ferenc Ének-Zenei Általános Iskola</item>
+        <item>Tapolca | apolcai Bárdos Lajos Általános Iskola Kazinczy Ferenc Tagintézménye</item>
+        <item>Várpalota | Bán Aladár Általános Iskola</item>
+        <item>Veszprém | Báthory István Általános Iskola</item>
+        <item>Veszprém | Deák Ferenc Általános Iskola</item>
+        <item>Veszprém | Dózsa György Általános Iskola</item>
+        <item>Veszprém | Kossuth Lajos Általános Iskola</item>
+        <item>Veszprém | Padányi Katolikus Gyakorlóiskola</item>
+        <item>Veszprém | Szilágyi Erzsébet Keresztény Általános Iskola és Alapfokú Művészetoktatási Intézmény</item>
+        <item>Zirc | Zirci Reguly Antal Német Nemzetiségi Nyelvoktató Általános Iskola</item>
+        <item>Veszprém megye <strong>(aloldal)</strong></item>
+        <item>Csíkszentkirály | Vitos Mózes Általános Iskola</item>
+        <item>Ipolybalog | Ipolyi Arnold Magyar Tanítási Nyelvű Alapiskola</item>
+        <item>Kishegyes | A MI ISKOLÁNK</item>
+        <item>Sepsiszentgyörgy | A Székely Mikó Általános Iskola hivatalos honlapja</item>
+        <item>Vajdakamarás | Vajdakamarási Általános Iskola</item>
+        <item>Határon túli magyar tannyelvű iskolák <strong>(aloldal)</strong></item>
+        <item>Kiskunfélegyháza | Darvas József Általános Iskola</item>
+        <item>Dunaújváros | Dunaújvárosi Dózsa György Általános Iskola</item>
+        <item>Debrecen | Huszár Gál Gimnázium Általános Iskola és AMI</item>
+        <item>Taktakenéz | Petőfi Sándor Általános Iskola Bóbita Óvoda és Konyha</item>
+        <item>Mátészalka | Képes Géza Általános Iskola</item>
+        <item>Békés | Dr. Hepp Ferenc Általános Iskola és Alapfokú Művészeti Iskol…</item>
+        <item>Szeged | Madách Imre Általános Iskola</item>
+        <item>Orosháza | Eötvös József  KAtolikus Általános Iskola és Óvoda</item>
+        <item>Miskolc | Bársony János Általános Iskola</item>
+        <item>Kecskemét | Magyar Ilona Általános Iskola</item>
+        <item>Kecskemét | II. Rákóczi Ferenc Általános Iskola</item>
+        <item>Győr | Fekete István Általános Iskola és Óvoda</item>
+        <item>budapesti általanos iskolák linkjei</item>
+        <item>Kecskemét | Lánchíd Utcai Általános Iskola</item>
+        <item>Debrecen | Benedek Elek Általános Iskola</item>
     </string-array>
 
 </resources>
