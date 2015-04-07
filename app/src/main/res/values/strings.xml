@@ -4,6 +4,8 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
 
+    <string name="alert_before_register">A regisztráció után már nem változtathatsz a beállításaidon!</string>
+
     <string-array name="list_of_cities">
         <item>Sopron</item>
         <item>Budapest</item>
