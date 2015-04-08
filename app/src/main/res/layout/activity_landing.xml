@@ -5,7 +5,7 @@
     android:layout_height="fill_parent"
     android:background="#FFFFFF"
     android:orientation="vertical"
-    tools:context=".MainActivity"
+    tools:context=".LandingActivity"
     android:weightSum="1">
 
     <ImageView
@@ -92,7 +92,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:enabled="false"
-        android:onClick="proceedToApp"/>
+        android:onClick="createAndShowAlertDialog"/>
 
 
 </LinearLayout>

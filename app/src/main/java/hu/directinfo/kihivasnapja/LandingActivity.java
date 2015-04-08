@@ -1,9 +1,12 @@
 package hu.directinfo.kihivasnapja;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.DialogPreference;
 import android.support.v7.app.ActionBarActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -47,6 +50,28 @@ public class LandingActivity extends ActionBarActivity {
             actionbar.setLogo(R.mipmap.ic_launcher);
         }
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     public void fillUpAutocomplete() {
@@ -179,7 +204,7 @@ public class LandingActivity extends ActionBarActivity {
         });
     }
 
-    public void proceedToApp(View view) {
+    public void proceedToApp() {
 
         // Get the shared preferences
         SharedPreferences.Editor editor = getSharedPreferences(PREFS_NAME, MODE_PRIVATE).edit();
@@ -209,26 +234,28 @@ public class LandingActivity extends ActionBarActivity {
         startActivity(intent);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
+    public void createAndShowAlertDialog() {
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
+        alertDialogBuilder.setTitle("Figyelem!");
+        alertDialogBuilder.setMessage("Ha egyszer beállította a települését és az iskoláját, később már nem térhet vissza erre a képernyőre. Folytatja?");
 
-        return super.onOptionsItemSelected(item);
+        alertDialogBuilder.setPositiveButton("Folytatás",new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+                proceedToApp();
+            }
+        });
+
+        alertDialogBuilder.setNegativeButton("Mégse", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
     }
 
     public static String flattenToAscii(String string) {
