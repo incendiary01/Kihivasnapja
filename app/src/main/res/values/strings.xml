@@ -444,5 +444,28 @@
         <item>Debrecen | Benedek Elek Általános Iskola</item>
     </string-array>
     <string name="title_activity_start">StartActivity</string>
+    <string name="title_activity_tab1">Tab1Activity</string>
+    <string name="title_activity_tab2">Tab2Activity</string>
+    <string name="title_activity_tabbed">TabbedActivity</string>
+
+
+    <string name="title_section1">Készíts egy képet</string>
+    <string name="title_section2">Töltsd fel</string>
+    <string name="title_section3">Section 3</string>
+    <string name="title_activity_image_fragment">ImageFragment</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="btnIntend">Take (big) Picture</string>
+    <string name="btnIntendS">Take (small) Picture</string>
+    <string name="btnIntendV">Take Video</string>
+    <string name="cannot">Cannot</string>
+    <string name="album_name">CameraSample</string>
+
+    <string name="btnTakePicture">Capture Image</string>
+    <string name="btnRecordVideo">Record Video</string>
+    <string name="or">(or)</string>
+    <string name="btnUploadToServer">Upload to Server</string>
 
 </resources>

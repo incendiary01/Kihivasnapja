@@ -37,7 +37,11 @@ public class LandingActivity extends ActionBarActivity {
 
         // If they have already registered we are redirecting them to the start activity
         if (checkIfRegistered()) {
-            setContentView(R.layout.activity_main);
+            //setContentView(R.layout.activity_main);
+
+            // Start the main activity
+            Intent intent = new Intent(this, LandingActivity.class);
+            startActivity(intent);
         }
         else
         {
@@ -230,11 +234,11 @@ public class LandingActivity extends ActionBarActivity {
         finish();
 
         // Start the start activity
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, LandingActivity.class);
         startActivity(intent);
     }
 
-    public void createAndShowAlertDialog() {
+    public void createAndShowAlertDialog(View view) {
 
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
 
@@ -255,6 +259,8 @@ public class LandingActivity extends ActionBarActivity {
                 dialog.cancel();
             }
         });
+
+        alertDialogBuilder.show();
 
     }
 
