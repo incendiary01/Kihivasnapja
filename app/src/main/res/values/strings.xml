@@ -19,12 +19,23 @@
         <item>Baja</item>
     </string-array>
 
-    <string-array name="Sumeg">
+    <string-array name="sumeg">
         <item>Sümeg1</item>
         <item>Sümeg2</item>
         <item>Sümeg3</item>
         <item>Sümeg4</item>
         <item>Sümeg5</item>
+    </string-array>
+
+    <string-array name="sopron">
+        <item>Deák Téri Általános Iskola</item>
+        <item>Fenyő Téri Általános Iskola</item>
+        <item>Gárdonyi Géza Általános Iskola</item>
+        <item>Hunyadi János Evangélikus Általános Iskola</item>
+        <item>Kozmutza Flóra Általános Iskola és Speciális Szakiskola</item>
+        <item>Lackner Kristóf Általános Iskola</item>
+        <item>Szent Orsolya Római Katolikus Általános Iskola, Gimnázium és Kollégium</item>
+        <item>Tóth Antal Óvoda, Általános Iskola és Kollégium</item>
     </string-array>
 
     <string-array name="list_of_schools">

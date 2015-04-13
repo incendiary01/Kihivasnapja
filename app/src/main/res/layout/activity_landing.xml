@@ -41,6 +41,7 @@
         android:layout_gravity="center_horizontal|bottom"
         android:layout_margin="20dp"
         android:singleLine="true"
+        android:completionThreshold="1"
         android:hint="Keresés"/>
 
     <TextView

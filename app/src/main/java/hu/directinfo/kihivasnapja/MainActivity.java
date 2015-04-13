@@ -1,15 +1,9 @@
 package hu.directinfo.kihivasnapja;
 
-import java.io.File;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
-
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -19,11 +13,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 public class MainActivity extends Activity {
 	
 	// LogCat tag
 	private static final String TAG = MainActivity.class.getSimpleName();
-	
  
     // Camera activity request codes
     private static final int CAMERA_CAPTURE_IMAGE_REQUEST_CODE = 100;
@@ -35,11 +33,15 @@ public class MainActivity extends Activity {
     private Uri fileUri; // file url to store image/video
     
     private Button btnCapturePicture, btnRecordVideo;
+
+    public static final String PREFS_NAME = "UserPreferences";
  
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        debugSavedPreferences();
         
         // Changing action bar background color
         // These two lines are not needed
@@ -80,6 +82,18 @@ public class MainActivity extends Activity {
             // will close the app if the device does't have camera
             finish();
         }
+    }
+
+    public void debugSavedPreferences() {
+
+        // Get Shared Preferences
+        SharedPreferences prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+        String choosenCity = prefs.getString("city", null);
+        String choosenSchool = prefs.getString("school", null);
+
+        Log.d("City",choosenCity);
+        Log.d("School",choosenSchool);
+
     }
  
     /**
@@ -149,8 +163,6 @@ public class MainActivity extends Activity {
         fileUri = savedInstanceState.getParcelable("file_uri");
     }
  
-    
- 
     /**
      * Receiving activity result method will be called after closing the camera
      * */
@@ -210,8 +222,8 @@ public class MainActivity extends Activity {
     }
      
     /**
-     * ------------ Helper Methods ---------------------- 
-     * */
+     * ------------ Helper Methods ----------------------
+     */
  
     /**
      * Creating file uri to store image/video
@@ -227,8 +239,7 @@ public class MainActivity extends Activity {
  
         // External sdcard location
         File mediaStorageDir = new File(
-                Environment
-                        .getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),
+                Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),
                 Config.IMAGE_DIRECTORY_NAME);
  
         // Create the storage directory if it does not exist

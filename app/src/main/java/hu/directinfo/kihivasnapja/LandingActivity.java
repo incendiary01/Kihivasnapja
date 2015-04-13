@@ -6,7 +6,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.DialogPreference;
 import android.support.v7.app.ActionBarActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -40,7 +39,7 @@ public class LandingActivity extends ActionBarActivity {
             //setContentView(R.layout.activity_main);
 
             // Start the main activity
-            Intent intent = new Intent(this, LandingActivity.class);
+            Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
         }
         else
@@ -140,7 +139,7 @@ public class LandingActivity extends ActionBarActivity {
     public boolean checkIfResourceExist(Editable s) {
 
         // Normalize string
-        String city = flattenToAscii(s.toString());
+        String city = flattenToAscii(s.toString().toLowerCase());
 
         // Get the array dynamically
         int getRes = getResources().getIdentifier(city, "array", getPackageName());
@@ -167,7 +166,7 @@ public class LandingActivity extends ActionBarActivity {
         imm.hideSoftInputFromWindow(cityAutoComplete.getWindowToken(), 0);
 
         // Normalize string
-        String city = flattenToAscii(item.toString());
+        String city = flattenToAscii(item.toString().toLowerCase());
 
         // Spinner reference
         Spinner spinner = (Spinner) findViewById(R.id.schoolSpinner);
@@ -234,7 +233,7 @@ public class LandingActivity extends ActionBarActivity {
         finish();
 
         // Start the start activity
-        Intent intent = new Intent(this, LandingActivity.class);
+        Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
 
