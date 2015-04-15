@@ -1,0 +1,99 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayout"
+    android:layout_width="match_parent"
+    android:layout_height="fill_parent"
+    android:background="#FFFFFF"
+    android:orientation="vertical"
+    tools:context=".LandingActivity"
+    android:weightSum="1">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:padding="20dp"
+        android:src="@drawable/logo_date" />
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="5dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/gradient" />
+
+    <TextView
+        android:id="@+id/selectCityText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
+        android:gravity="left"
+        android:labelFor="@+id/cityAutoComplete"
+        android:text="Válaszd ki a városodat"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#EF4B4B"
+        android:textSize="18dp"/>
+
+    <AutoCompleteTextView
+        android:id="@+id/cityAutoComplete"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|bottom"
+        android:layout_margin="20dp"
+        android:singleLine="true"
+        android:completionThreshold="1"
+        android:hint="Keresés"/>
+
+    <TextView
+        android:id="@+id/selectSchoolText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
+        android:gravity="left"
+        android:labelFor="@+id/schoolAutoComplete"
+        android:text="Válaszd ki az iskoládat"
+        android:textAlignment="center"
+        android:layout_weight="0"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#EF4B4B"
+        android:textSize="18dp"/>
+
+    <!--<AutoCompleteTextView
+        android:id="@+id/schoolAutoComplete"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|bottom"
+        android:layout_margin="20dp"
+        android:singleLine="false"
+        android:hint="Keresés"
+        android:enabled="false" />-->
+
+    <!--<ListView
+        android:id="@+id/listView"
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1" />-->
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:id="@+id/schoolSpinner"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.11"
+        android:spinnerMode="dialog"
+        android:layout_margin="20dp"
+        android:enabled="false"/>
+
+    <Button
+        android:id="@+id/registerForward"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:text="Tovább"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:enabled="false"
+        android:onClick="createAndShowAlertDialog"/>
+
+
+</LinearLayout>

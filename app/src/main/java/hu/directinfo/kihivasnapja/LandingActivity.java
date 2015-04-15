@@ -1,8 +1,6 @@
 package hu.directinfo.kihivasnapja;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -36,11 +34,13 @@ public class LandingActivity extends ActionBarActivity {
 
         // If they have already registered we are redirecting them to the start activity
         if (checkIfRegistered()) {
-            //setContentView(R.layout.activity_main);
 
+            // setContentView(R.layout.activity_main);
             // Start the main activity
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
+
+            finish();
         }
         else
         {
@@ -158,7 +158,7 @@ public class LandingActivity extends ActionBarActivity {
     public void enableSchoolSpinner(Editable item, AutoCompleteTextView cityAutoComplete) {
 
         // Set the selected city
-        this.selectedCity = item.toString();
+        this.selectedCity = flattenToAscii(item.toString().toLowerCase());
 
         // Hide the keyboard
         InputMethodManager imm = (InputMethodManager)getSystemService(
@@ -194,7 +194,7 @@ public class LandingActivity extends ActionBarActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
                 String temp_school = (String) schools_adapter.getItem(position);
-                selectedSchool = temp_school;
+                selectedSchool = flattenToAscii(temp_school.toString().toLowerCase());
 
                 Button button = (Button) findViewById(R.id.registerForward);
                 button.setEnabled(true);
@@ -239,7 +239,7 @@ public class LandingActivity extends ActionBarActivity {
 
     public void createAndShowAlertDialog(View view) {
 
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        /*AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
 
         alertDialogBuilder.setTitle("Figyelem!");
         alertDialogBuilder.setMessage("Ha egyszer beállította a települését és az iskoláját, később már nem térhet vissza erre a képernyőre. Folytatja?");
@@ -259,7 +259,9 @@ public class LandingActivity extends ActionBarActivity {
             }
         });
 
-        alertDialogBuilder.show();
+        alertDialogBuilder.show();*/
+
+        proceedToApp();
 
     }
 

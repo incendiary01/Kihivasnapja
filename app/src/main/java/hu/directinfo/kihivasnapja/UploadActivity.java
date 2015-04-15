@@ -27,6 +27,7 @@ import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.entity.mime.content.StringBody;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
+import org.json.JSONObject;
 
 import java.io.File;
 import java.io.IOException;
@@ -151,8 +152,8 @@ public class UploadActivity extends Activity {
 			HttpPost httppost = new HttpPost(Config.FILE_UPLOAD_URL);
 
             SharedPreferences prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
-            String choosenCity = prefs.getString("city", null);
-            String choosenSchool = prefs.getString("school", null);
+            final String choosenCity = prefs.getString("city", null);
+            final String choosenSchool = prefs.getString("school", null);
 
 			try {
 				AndroidMultiPartEntity entity = new AndroidMultiPartEntity(
@@ -200,6 +201,19 @@ public class UploadActivity extends Activity {
 
 		@Override
 		protected void onPostExecute(String result) {
+
+            try {
+
+                JSONObject obj = new JSONObject(result);
+
+                Log.d("My App", obj.toString());
+
+            } catch (Throwable t) {
+
+                Log.e("My App", "Could not parse malformed JSON: \"" + result + "\"");
+
+            }
+
 			Log.e(TAG, "Response from server: " + result);
 
 			// showing the server response in an alert dialog
