@@ -27,17 +27,17 @@
             android:text="@string/btnTakePicture"
             android:textColor="@color/white" />
 
-        <TextView
+        <!--<TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
             android:gravity="center_horizontal"
             android:text="@string/or"
-            android:textColor="@color/txt_font" />
+            android:textColor="@color/txt_font" />-->
 
         <!-- Record video button -->
 
-        <Button
+        <!--<Button
             android:id="@+id/btnRecordVideo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -45,7 +45,7 @@
             android:paddingLeft="20dp"
             android:paddingRight="20dp"
             android:text="@string/btnRecordVideo"
-            android:textColor="@color/white" />
+            android:textColor="@color/white" />-->
     </LinearLayout>
 
 </RelativeLayout>

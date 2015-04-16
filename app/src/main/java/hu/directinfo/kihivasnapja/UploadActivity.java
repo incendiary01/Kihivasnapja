@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
+import android.media.ExifInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -30,6 +32,7 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 
 import hu.directinfo.kihivasnapja.AndroidMultiPartEntity.ProgressListener;
@@ -39,6 +42,7 @@ public class UploadActivity extends Activity {
 	private static final String TAG = MainActivity.class.getSimpleName();
 
 	private ProgressBar progressBar;
+	private ProgressBar progressBarSpinner;
 	private String filePath = null;
 	private TextView txtPercentage;
 	private ImageView imgPreview;
@@ -55,6 +59,7 @@ public class UploadActivity extends Activity {
 		txtPercentage = (TextView) findViewById(R.id.txtPercentage);
 		btnUpload = (Button) findViewById(R.id.btnUpload);
 		progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        progressBarSpinner = (ProgressBar) findViewById(R.id.progressBarSpinner);
 		imgPreview = (ImageView) findViewById(R.id.imgPreview);
 		vidPreview = (VideoView) findViewById(R.id.videoPreview);
 
@@ -82,6 +87,13 @@ public class UploadActivity extends Activity {
 		btnUpload.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
+
+                // make the upload button invisible
+                btnUpload.setVisibility(View.GONE);
+
+                // make the sinner progress bar visible
+                progressBarSpinner.setVisibility(View.VISIBLE);
+
 				// uploading the file to server
 				new UploadFileToServer().execute();
 			}
@@ -120,6 +132,7 @@ public class UploadActivity extends Activity {
 	 * Uploading the file to server
 	 * */
 	private class UploadFileToServer extends AsyncTask<Void, Integer, String> {
+
 		@Override
 		protected void onPreExecute() {
 			// setting progress bar to zero
@@ -146,6 +159,7 @@ public class UploadActivity extends Activity {
 
 		@SuppressWarnings("deprecation")
 		private String uploadFile() {
+
 			String responseString = null;
 
 			HttpClient httpclient = new DefaultHttpClient();
@@ -164,7 +178,9 @@ public class UploadActivity extends Activity {
 							}
 						});
 
-				File sourceFile = new File(filePath);
+                File sourceFile = new File(filePath);
+
+                resizeImageBeforeUpload();
 
 				// Adding file data to http body
 				entity.addPart("image", new FileBody(sourceFile));
@@ -199,7 +215,7 @@ public class UploadActivity extends Activity {
 
 		}
 
-		@Override
+        @Override
 		protected void onPostExecute(String result) {
 
             try {
@@ -229,7 +245,8 @@ public class UploadActivity extends Activity {
 	 * */
 	private void showAlert(String message) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setMessage(message).setTitle("Response from Servers")
+		builder.setMessage(message)
+                .setTitle("Response from Servers")
 				.setCancelable(false)
 				.setPositiveButton("OK", new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int id) {
@@ -240,4 +257,80 @@ public class UploadActivity extends Activity {
 		alert.show();
 	}
 
+    public void resizeImageBeforeUpload() {
+
+        ExifInterface exif = null;
+        try {
+            exif = new ExifInterface(filePath);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        int orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_UNDEFINED);
+
+        Bitmap b = BitmapFactory.decodeFile(filePath);
+        Bitmap out = scaleBitmap(b, (b.getWidth()/3), (b.getHeight()/3), orientation);
+
+        File file = new File(filePath);
+        FileOutputStream fOut;
+        try {
+            fOut = new FileOutputStream(file);
+            out.compress(Bitmap.CompressFormat.PNG, 100, fOut);
+            fOut.flush();
+            fOut.close();
+            b.recycle();
+            out.recycle();
+
+            progressBarSpinner.setVisibility(View.GONE);
+        } catch (Exception e) {
+            Log.e("FileOutputStreamError",e.getMessage());
+        }
+    }
+
+    public Bitmap scaleBitmap(Bitmap bitmapToScale, float newWidth, float newHeight, int orientation) {
+
+        if(bitmapToScale == null)
+            return null;
+
+        Matrix matrix = new Matrix();
+        switch (orientation) {
+            case ExifInterface.ORIENTATION_NORMAL:
+                break;
+            case ExifInterface.ORIENTATION_FLIP_HORIZONTAL:
+                matrix.setScale(-1, 1);
+                break;
+            case ExifInterface.ORIENTATION_ROTATE_180:
+                matrix.setRotate(180);
+                break;
+            case ExifInterface.ORIENTATION_FLIP_VERTICAL:
+                matrix.setRotate(180);
+                matrix.postScale(-1, 1);
+                break;
+            case ExifInterface.ORIENTATION_TRANSPOSE:
+                matrix.setRotate(90);
+                matrix.postScale(-1, 1);
+                break;
+            case ExifInterface.ORIENTATION_ROTATE_90:
+                matrix.setRotate(90);
+                break;
+            case ExifInterface.ORIENTATION_TRANSVERSE:
+                matrix.setRotate(-90);
+                matrix.postScale(-1, 1);
+                break;
+            case ExifInterface.ORIENTATION_ROTATE_270:
+                matrix.setRotate(-90);
+                break;
+            default:
+                break;
+        }
+
+        //get the original width and height
+        int width = bitmapToScale.getWidth();
+        int height = bitmapToScale.getHeight();
+
+        // resize the bit map
+        matrix.postScale(newWidth / width, newHeight / height);
+
+        // recreate the new Bitmap and set it back
+        return Bitmap.createBitmap(bitmapToScale, 0, 0, bitmapToScale.getWidth(), bitmapToScale.getHeight(), matrix, true);
+    }
 }

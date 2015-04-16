@@ -1,14 +1,18 @@
 package hu.directinfo.kihivasnapja;
 
-import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -18,28 +22,33 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-public class MainActivity extends Activity {
+public class MainActivity extends ActionBarActivity {
 	
 	// LogCat tag
 	private static final String TAG = MainActivity.class.getSimpleName();
- 
+
     // Camera activity request codes
     private static final int CAMERA_CAPTURE_IMAGE_REQUEST_CODE = 100;
     private static final int CAMERA_CAPTURE_VIDEO_REQUEST_CODE = 200;
     
     public static final int MEDIA_TYPE_IMAGE = 1;
     public static final int MEDIA_TYPE_VIDEO = 2;
- 
+
     private Uri fileUri; // file url to store image/video
     
     private Button btnCapturePicture, btnRecordVideo;
 
     public static final String PREFS_NAME = "UserPreferences";
- 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        android.support.v7.app.ActionBar actionbar = getSupportActionBar();
+        actionbar.setDisplayShowHomeEnabled(true);
+        actionbar.setDisplayUseLogoEnabled(true);
+        actionbar.setLogo(R.mipmap.ic_launcher);
 
         debugSavedPreferences();
         
@@ -48,7 +57,7 @@ public class MainActivity extends Activity {
         //getActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor(getResources().getString(R.color.action_bar))));
  
         btnCapturePicture = (Button) findViewById(R.id.btnCapturePicture);
-        btnRecordVideo = (Button) findViewById(R.id.btnRecordVideo);
+        //btnRecordVideo = (Button) findViewById(R.id.btnRecordVideo);
  
         /**
          * Capture image button click event
@@ -65,14 +74,14 @@ public class MainActivity extends Activity {
         /**
          * Record video button click event
          */
-        btnRecordVideo.setOnClickListener(new View.OnClickListener() {
+        /*btnRecordVideo.setOnClickListener(new View.OnClickListener() {
  
             @Override
             public void onClick(View v) {
                 // record video
                 recordVideo();
             }
-        });
+        });*/
  
         // Checking camera availability
         if (!isDeviceSupportCamera()) {
@@ -82,6 +91,38 @@ public class MainActivity extends Activity {
             // will close the app if the device does't have camera
             finish();
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+
+        MenuItem item = menu.findItem(R.id.action_settings);
+
+        if (item == null)
+            return true;
+
+        item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.toString()) {
+                    case "Settings":
+                        showSettings();
+                        break;
+                }
+                return true;
+            }
+        });
+
+        return true;
+    }
+
+    private void showSettings() {
+
+        Intent intent = new Intent(this, SettingsActivity.class);
+        startActivity(intent);
+
     }
 
     public void debugSavedPreferences() {
@@ -135,9 +176,10 @@ public class MainActivity extends Activity {
         // set video quality
         intent.putExtra(MediaStore.EXTRA_VIDEO_QUALITY, 1);
  
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri); // set the image file
-                                                            // name
- 
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
+
+        // set the image file
+        // name
         // start the video capture Intent
         startActivityForResult(intent, CAMERA_CAPTURE_VIDEO_REQUEST_CODE);
     }
@@ -215,6 +257,9 @@ public class MainActivity extends Activity {
     }
     
     private void launchUploadActivity(boolean isImage){
+
+        getCameraPhotoOrientation(this,fileUri,fileUri.getPath());
+
     	Intent i = new Intent(MainActivity.this, UploadActivity.class);
         i.putExtra("filePath", fileUri.getPath());
         i.putExtra("isImage", isImage);
@@ -266,5 +311,35 @@ public class MainActivity extends Activity {
         }
  
         return mediaFile;
+    }
+
+    public static int getCameraPhotoOrientation(Context context, Uri imageUri, String imagePath){
+        int rotate = 0;
+        try {
+            context.getContentResolver().notifyChange(imageUri, null);
+            File imageFile = new File(imagePath);
+            ExifInterface exif = new ExifInterface(imageFile.getAbsolutePath());
+            int orientation = exif.getAttributeInt(
+                    ExifInterface.TAG_ORIENTATION,
+                    ExifInterface.ORIENTATION_NORMAL);
+
+            switch (orientation) {
+                case ExifInterface.ORIENTATION_ROTATE_270:
+                    rotate = 270;
+                    break;
+                case ExifInterface.ORIENTATION_ROTATE_180:
+                    rotate = 180;
+                    break;
+                case ExifInterface.ORIENTATION_ROTATE_90:
+                    rotate = 90;
+                    break;
+            }
+
+
+            Log.v(TAG, "Exif orientation: " + orientation);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return rotate;
     }
 }
