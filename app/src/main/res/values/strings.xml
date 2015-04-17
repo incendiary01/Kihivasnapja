@@ -6,6 +6,13 @@
 
     <string name="alert_before_register">A regisztráció után már nem változtathatsz a beállításaidon!</string>
 
+    <string name="fileUploadSuccess">Sikeres képfeltöltés!</string>
+    <string name="fileUploadFailure">Sikertelen képfeltöltés! Kérem próbálja meg később!</string>
+    <string name="takeAnOtherPicture">Újabb kép készítése</string>
+    <string name="backToPreviousActivity">Vissza</string>
+
+    <string name="dateOfEvent">2015. május 20.</string>
+
     <string-array name="list_of_cities">
         <item>Sopron</item>
         <item>Budapest</item>

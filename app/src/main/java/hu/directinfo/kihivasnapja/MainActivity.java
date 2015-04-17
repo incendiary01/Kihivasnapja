@@ -11,8 +11,6 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -21,6 +19,9 @@ import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+
+import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class MainActivity extends ActionBarActivity {
 	
@@ -45,12 +46,35 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        android.support.v7.app.ActionBar actionbar = getSupportActionBar();
+        CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
+                        .setDefaultFontPath("fonts/gothamroundedbook.ttf")
+                        .setFontAttrId(R.attr.fontPath)
+                        .build()
+        );
+
+       /* android.support.v7.app.ActionBar mActionBar = getSupportActionBar();
+        mActionBar.setDisplayShowHomeEnabled(false);
+        mActionBar.setDisplayShowTitleEnabled(false);
+
+        LayoutInflater mInflater = LayoutInflater.from(this);
+
+        View mCustomView = mInflater.inflate(R.layout.custom_actionbar,null);
+
+        ImageButton imageButton = (ImageButton) mCustomView.findViewById(R.id.imageButton);
+        imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(), "Menu Clicked!",
+                        Toast.LENGTH_LONG).show();
+            }
+        });*/
+
+        /*android.support.v7.app.ActionBar actionbar = getSupportActionBar();
         actionbar.setDisplayShowHomeEnabled(true);
         actionbar.setDisplayUseLogoEnabled(true);
         actionbar.setLogo(R.mipmap.ic_launcher);
 
-        debugSavedPreferences();
+        debugSavedPreferences();*/
         
         // Changing action bar background color
         // These two lines are not needed
@@ -94,6 +118,11 @@ public class MainActivity extends ActionBarActivity {
     }
 
     @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+    }
+
+/*    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
@@ -116,7 +145,7 @@ public class MainActivity extends ActionBarActivity {
         });
 
         return true;
-    }
+    }*/
 
     private void showSettings() {
 

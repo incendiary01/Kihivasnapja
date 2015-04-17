@@ -8,6 +8,12 @@
     tools:context=".LandingActivity"
     android:weightSum="1">
 
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="5dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/gradient" />
+
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="match_parent"
@@ -15,12 +21,6 @@
         android:layout_gravity="center_horizontal"
         android:padding="20dp"
         android:src="@drawable/logo_date" />
-
-    <View
-        android:layout_width="fill_parent"
-        android:layout_height="5dp"
-        android:layout_marginBottom="10dp"
-        android:background="@drawable/gradient" />
 
     <TextView
         android:id="@+id/selectCityText"

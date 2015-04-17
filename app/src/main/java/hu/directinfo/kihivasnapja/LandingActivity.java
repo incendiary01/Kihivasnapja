@@ -1,12 +1,14 @@
 package hu.directinfo.kihivasnapja;
 
+import android.app.ActionBar;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -14,12 +16,17 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import java.text.Normalizer;
 
+import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
-public class LandingActivity extends ActionBarActivity {
+
+public class LandingActivity extends Activity {
 
     private AutoCompleteTextView cityAutoComplete;
     private ArrayAdapter cities_adapter;
@@ -31,6 +38,12 @@ public class LandingActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
+                .setDefaultFontPath("fonts/gothamroundedbook.ttf")
+                .setFontAttrId(R.attr.fontPath)
+                .build()
+        );
+
         // If they have already registered we are redirecting them to the start activity
         if (checkIfRegistered()) {
 
@@ -40,18 +53,42 @@ public class LandingActivity extends ActionBarActivity {
             startActivity(intent);
 
             finish();
-        }
-        else
-        {
+        } else {
+
             setContentView(R.layout.activity_landing);
             fillUpAutocomplete();
 
-            android.support.v7.app.ActionBar actionbar = getSupportActionBar();
+            /*android.support.v7.app.ActionBar actionbar = getSupportActionBar();
             actionbar.setDisplayShowHomeEnabled(true);
             actionbar.setDisplayUseLogoEnabled(true);
-            actionbar.setLogo(R.mipmap.ic_launcher);
+            actionbar.setLogo(logo_with_date);*/
+
+            ActionBar mActionBar = getActionBar();
+            mActionBar.setDisplayShowHomeEnabled(false);
+            mActionBar.setDisplayShowTitleEnabled(false);
+
+            LayoutInflater mInflater = LayoutInflater.from(this);
+
+            View mCustomView = mInflater.inflate(R.layout.custom_actionbar,null);
+
+            ImageButton imageButton = (ImageButton) mCustomView.findViewById(R.id.imageButton);
+            imageButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(getApplicationContext(), "Menu Clicked!",
+                            Toast.LENGTH_LONG).show();
+                }
+            });
+
+            mActionBar.setCustomView(mCustomView);
+            mActionBar.setDisplayShowCustomEnabled(true);
         }
 
+    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
 
     @Override
@@ -75,7 +112,7 @@ public class LandingActivity extends ActionBarActivity {
         String[] cities = getResources().getStringArray(R.array.list_of_cities);
 
         // Create the array_adapter
-        cities_adapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1,cities);
+        cities_adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, cities);
 
         // Get a reference on AutoCompleteTextView
         cityAutoComplete = (AutoCompleteTextView) findViewById(R.id.cityAutoComplete);
@@ -153,7 +190,7 @@ public class LandingActivity extends ActionBarActivity {
         this.selectedCity = flattenToAscii(item.toString().toLowerCase());
 
         // Hide the keyboard
-        InputMethodManager imm = (InputMethodManager)getSystemService(
+        InputMethodManager imm = (InputMethodManager) getSystemService(
                 Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(cityAutoComplete.getWindowToken(), 0);
 
@@ -169,7 +206,7 @@ public class LandingActivity extends ActionBarActivity {
 
         // Create the adapter
         final ArrayAdapter schools_adapter =
-                new ArrayAdapter(this,android.R.layout.simple_list_item_1,schools);
+                new ArrayAdapter(this, android.R.layout.simple_list_item_1, schools);
 
         // Set the spinner type
         schools_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
