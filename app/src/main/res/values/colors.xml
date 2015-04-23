@@ -6,5 +6,6 @@
     <color name="white">#ffffff</color>
     <color name="txt_font">#4e5572</color>
     <color name="action_bar">#00b1dc</color>
+    <color name="active_button">#ef4b4b</color>
 
 </resources>

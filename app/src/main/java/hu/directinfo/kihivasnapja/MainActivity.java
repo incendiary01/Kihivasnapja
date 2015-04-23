@@ -10,7 +10,10 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -52,29 +55,7 @@ public class MainActivity extends ActionBarActivity {
                         .build()
         );
 
-       /* android.support.v7.app.ActionBar mActionBar = getSupportActionBar();
-        mActionBar.setDisplayShowHomeEnabled(false);
-        mActionBar.setDisplayShowTitleEnabled(false);
-
-        LayoutInflater mInflater = LayoutInflater.from(this);
-
-        View mCustomView = mInflater.inflate(R.layout.custom_actionbar,null);
-
-        ImageButton imageButton = (ImageButton) mCustomView.findViewById(R.id.imageButton);
-        imageButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "Menu Clicked!",
-                        Toast.LENGTH_LONG).show();
-            }
-        });*/
-
-        /*android.support.v7.app.ActionBar actionbar = getSupportActionBar();
-        actionbar.setDisplayShowHomeEnabled(true);
-        actionbar.setDisplayUseLogoEnabled(true);
-        actionbar.setLogo(R.mipmap.ic_launcher);
-
-        debugSavedPreferences();*/
+        handleActionBar();
         
         // Changing action bar background color
         // These two lines are not needed
@@ -87,7 +68,6 @@ public class MainActivity extends ActionBarActivity {
          * Capture image button click event
          */
         btnCapturePicture.setOnClickListener(new View.OnClickListener() {
- 
             @Override
             public void onClick(View v) {
                 // capture picture
@@ -117,12 +97,24 @@ public class MainActivity extends ActionBarActivity {
         }
     }
 
+    public void handleActionBar() {
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        getSupportActionBar().setTitle("  KIHÍVÁS NAPJA");
+        getSupportActionBar().setSubtitle("  2015. május 20.");
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setIcon(R.drawable.logo_white_transparent_smaller);
+
+    }
+
     @Override
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
 
-/*    @Override
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
@@ -145,7 +137,7 @@ public class MainActivity extends ActionBarActivity {
         });
 
         return true;
-    }*/
+    }
 
     private void showSettings() {
 

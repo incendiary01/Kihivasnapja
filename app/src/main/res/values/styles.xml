@@ -1,17 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!-- Application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light">
-        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+    <style name="MyTheme" parent="MyTheme.Base">
+    </style>
+    <!-- Base theme applied no matter what API -->
+    <style name="MyTheme.Base" parent="Theme.AppCompat.Light.DarkActionBar">
 
-        <!--Action bar style-->
-        <item name="android:actionBarStyle">@style/AppTheme.ActionBar</item>
-        <item name="actionBarStyle">@style/AppTheme.ActionBar</item>
+        <item name="windowActionModeOverlay">true</item>
+
+        <!--<item name="android:windowNoTitle">true</item>-->
+        <!--We will be using the toolbar so no need to show ActionBar-->
+        <item name="windowActionBar">false</item>
+        <!-- Set theme colors from http://www.google.com/design/spec/style/color.html#color-color-palette-->
+        <!-- colorPrimary is used for the default action bar background -->
+        <item name="colorPrimary">#00b1dc</item>
+        <!-- colorPrimaryDark is used for the status bar -->
+        <item name="colorPrimaryDark">#1976D2</item>
+        <!-- colorAccent is used as the default value for colorControlActivated
+             which is used to tint widgets -->
+        <item name="colorAccent">#00b1dc</item>
+        <!-- You can also set colorControlNormal, colorControlActivated
+            colorControlHighlight and colorSwitchThumbNormal. -->
+    </style>
+
+    <!-- ToolBar -->
+    <style name="ToolBarStyle" parent="Theme.AppCompat">
+        <item name="android:textColorPrimary">@android:color/white</item>
+        <item name="android:textColorSecondary">@android:color/white</item>
+        <item name="actionMenuTextColor">@android:color/white</item>
+    </style>
+
+    <!--&lt;!&ndash; Application theme. &ndash;&gt;
+    <style name="AppTheme" parent="@style/Theme.AppCompat.Light">
+
+        &lt;!&ndash; All customizations that are NOT specific to a particular API-level can go here. &ndash;&gt;
+        &lt;!&ndash;Action bar style&ndash;&gt;
+        <item name="android:actionBarStyle">@style/MyActionBar</item>
+        <item name="actionBarStyle">@style/MyActionBar</item>
 
     </style>
 
-    <style name="AppTheme.ActionBar" parent="Widget.AppCompat.Light.ActionBar">
+    <style name="MyActionBar" parent="@style/Widget.AppCompat.ActionBar">
         <item name="android:height">@dimen/bar_height</item>
-    </style>
+        <item name="android:background">@color/action_bar</item>
+    </style>-->
 
 </resources>

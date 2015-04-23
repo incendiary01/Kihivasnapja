@@ -1,14 +1,13 @@
 package hu.directinfo.kihivasnapja;
 
-import android.app.ActionBar;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -16,9 +15,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import java.text.Normalizer;
 
@@ -26,7 +23,7 @@ import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 
-public class LandingActivity extends Activity {
+public class LandingActivity extends ActionBarActivity {
 
     private AutoCompleteTextView cityAutoComplete;
     private ArrayAdapter cities_adapter;
@@ -47,23 +44,26 @@ public class LandingActivity extends Activity {
         // If they have already registered we are redirecting them to the start activity
         if (checkIfRegistered()) {
 
-            // setContentView(R.layout.activity_main);
             // Start the main activity
-            Intent intent = new Intent(this, MainActivity.class);
+            Intent intent = new Intent(LandingActivity.this, MainActivity.class);
             startActivity(intent);
 
             finish();
+
         } else {
 
             setContentView(R.layout.activity_landing);
+            handleActionBar();
             fillUpAutocomplete();
 
-            /*android.support.v7.app.ActionBar actionbar = getSupportActionBar();
+
+
+           /* android.support.v7.app.ActionBar actionbar = getSupportActionBar();
             actionbar.setDisplayShowHomeEnabled(true);
             actionbar.setDisplayUseLogoEnabled(true);
-            actionbar.setLogo(logo_with_date);*/
+            actionbar.setLogo(R.drawable.logo);*/
 
-            ActionBar mActionBar = getActionBar();
+           /* android.support.v7.app.ActionBar mActionBar = getSupportActionBar();
             mActionBar.setDisplayShowHomeEnabled(false);
             mActionBar.setDisplayShowTitleEnabled(false);
 
@@ -81,8 +81,20 @@ public class LandingActivity extends Activity {
             });
 
             mActionBar.setCustomView(mCustomView);
-            mActionBar.setDisplayShowCustomEnabled(true);
+            mActionBar.setDisplayShowCustomEnabled(true);*/
         }
+
+    }
+
+    public void handleActionBar() {
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        getSupportActionBar().setTitle("  KIHÍVÁS NAPJA");
+        getSupportActionBar().setSubtitle("  2015. május 20.");
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setIcon(R.drawable.logo_white_transparent_smaller);
 
     }
 
@@ -161,8 +173,12 @@ public class LandingActivity extends Activity {
         // Button reference
         Button button = (Button) findViewById(R.id.registerForward);
 
+        // Set the button style back to default
+        button.setBackgroundResource(android.R.drawable.btn_default);
+
         // Disable Button
         button.setEnabled(false);
+
     }
 
     public boolean checkIfResourceExist(Editable s) {
@@ -201,7 +217,7 @@ public class LandingActivity extends Activity {
         Spinner spinner = (Spinner) findViewById(R.id.schoolSpinner);
 
         // Get the array dynamically
-        int getRes = getResources().getIdentifier(city, "array", getPackageName());
+        final int getRes = getResources().getIdentifier(city, "array", getPackageName());
         String[] schools = getResources().getStringArray(getRes);
 
         // Create the adapter
@@ -226,6 +242,7 @@ public class LandingActivity extends Activity {
                 selectedSchool = flattenToAscii(temp_school.toString().toLowerCase());
 
                 Button button = (Button) findViewById(R.id.registerForward);
+                button.setBackgroundColor(getResources().getColor(R.color.active_button));
                 button.setEnabled(true);
             }
 

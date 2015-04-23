@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -46,13 +47,10 @@ public class SettingsActivity extends ActionBarActivity {
         currentCity = (TextView) findViewById(R.id.currentCity);
         currentSchool = (TextView) findViewById(R.id.currentSchool);
 
+        handleActionBar();
         fillUpAutocomplete();
         writeOutCurrentSettings();
 
-        android.support.v7.app.ActionBar actionbar = getSupportActionBar();
-        actionbar.setDisplayHomeAsUpEnabled(true);
-        actionbar.setDisplayUseLogoEnabled(true);
-        actionbar.setLogo(R.mipmap.ic_launcher);
 
         /*
         * Capture savePreferences click event
@@ -65,6 +63,17 @@ public class SettingsActivity extends ActionBarActivity {
         });
 
      }
+
+    public void handleActionBar() {
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        getSupportActionBar().setTitle("  KIHÍVÁS NAPJA");
+        getSupportActionBar().setSubtitle("  2015. május 20.");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setIcon(R.drawable.logo_white_transparent_smaller);
+    }
 
     private void writeOutCurrentSettings() {
 
