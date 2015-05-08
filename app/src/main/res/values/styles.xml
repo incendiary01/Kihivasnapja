@@ -21,6 +21,7 @@
         <item name="colorAccent">#00b1dc</item>
         <!-- You can also set colorControlNormal, colorControlActivated
             colorControlHighlight and colorSwitchThumbNormal. -->
+
     </style>
 
     <!-- ToolBar -->

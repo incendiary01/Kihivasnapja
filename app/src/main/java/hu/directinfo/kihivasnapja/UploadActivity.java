@@ -1,6 +1,5 @@
 package hu.directinfo.kihivasnapja;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -11,9 +10,12 @@ import android.graphics.Matrix;
 import android.media.ExifInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -34,20 +36,21 @@ import org.json.JSONObject;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.charset.Charset;
 
 import hu.directinfo.kihivasnapja.AndroidMultiPartEntity.ProgressListener;
 
-public class UploadActivity extends Activity {
+public class UploadActivity extends ActionBarActivity {
     // LogCat tag
     private static final String TAG = MainActivity.class.getSimpleName();
 
     private ProgressBar progressBar;
-    private ProgressBar progressBarSpinner;
     private String filePath = null;
     private TextView txtPercentage;
     private ImageView imgPreview;
     private VideoView vidPreview;
     private Button btnUpload;
+    private EditText imageTitle;
     long totalSize = 0;
 
     public static final String PREFS_NAME = "UserPreferences";
@@ -59,13 +62,14 @@ public class UploadActivity extends Activity {
         txtPercentage = (TextView) findViewById(R.id.txtPercentage);
         btnUpload = (Button) findViewById(R.id.btnUpload);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
-        progressBarSpinner = (ProgressBar) findViewById(R.id.progressBarSpinner);
         imgPreview = (ImageView) findViewById(R.id.imgPreview);
-        vidPreview = (VideoView) findViewById(R.id.videoPreview);
+//        vidPreview = (VideoView) findViewById(R.id.videoPreview);
+
+        handleActionBar();
 
         // Changing action bar background color
         /*getActionBar().setBackgroundDrawable(
-				new ColorDrawable(Color.parseColor(getResources().getString(R.color.action_bar))));*/
+                new ColorDrawable(Color.parseColor(getResources().getString(R.color.action_bar))));*/
 
         // Receiving the data from previous activity
         Intent i = getIntent();
@@ -91,13 +95,22 @@ public class UploadActivity extends Activity {
                 // make the upload button invisible
                 btnUpload.setVisibility(View.GONE);
 
-                // make the sinner progress bar visible
-                progressBarSpinner.setVisibility(View.VISIBLE);
-
                 // uploading the file to server
                 new UploadFileToServer().execute();
             }
         });
+
+    }
+
+    public void handleActionBar() {
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        getSupportActionBar().setTitle("  KIHÍVÁS NAPJA");
+        getSupportActionBar().setSubtitle("  2015. május 20.");
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setIcon(R.drawable.logo_white_transparent_smaller);
 
     }
 
@@ -108,7 +121,7 @@ public class UploadActivity extends Activity {
         // Checking whether captured media is image or video
         if (isImage) {
             imgPreview.setVisibility(View.VISIBLE);
-            vidPreview.setVisibility(View.GONE);
+//            vidPreview.setVisibility(View.GONE);
             // bimatp factory
             BitmapFactory.Options options = new BitmapFactory.Options();
 
@@ -121,10 +134,10 @@ public class UploadActivity extends Activity {
             imgPreview.setImageBitmap(bitmap);
         } else {
             imgPreview.setVisibility(View.GONE);
-            vidPreview.setVisibility(View.VISIBLE);
-            vidPreview.setVideoPath(filePath);
+//            vidPreview.setVisibility(View.VISIBLE);
+//            vidPreview.setVideoPath(filePath);
             // start playing
-            vidPreview.start();
+//            vidPreview.start();
         }
     }
 
@@ -169,7 +182,15 @@ public class UploadActivity extends Activity {
             final String choosenCity = prefs.getString("city", null);
             final String choosenSchool = prefs.getString("school", null);
 
+            String choosenCityAccent = prefs.getString("cityAccent", null);
+            String choosenSchoolAccent = prefs.getString("schoolAccent", null);
+
+            imageTitle = (EditText)findViewById(R.id.imageTitle);
+
+            //prefs.getString("schoolAccent", null);
+
             try {
+
                 AndroidMultiPartEntity entity = new AndroidMultiPartEntity(
                         new ProgressListener() {
                             @Override
@@ -188,6 +209,9 @@ public class UploadActivity extends Activity {
                 // Extra parameters if you want to pass to server
                 entity.addPart("city", new StringBody(choosenCity));
                 entity.addPart("school", new StringBody(choosenSchool));
+                entity.addPart("cityAccent", new StringBody(choosenCityAccent,Charset.forName("UTF-8")));
+                entity.addPart("schoolAccent", new StringBody(choosenSchoolAccent,Charset.forName("UTF-8")));
+                entity.addPart("imageTitle", new StringBody(imageTitle.getText().toString(),Charset.forName("UTF-8")));
 
                 totalSize = entity.getContentLength();
                 httppost.setEntity(entity);
@@ -250,24 +274,38 @@ public class UploadActivity extends Activity {
      */
     private void showAlert(Boolean error) {
 
+/*        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Kihívás napja").setCancelable(true);
+
+        builder.setMessage(error);
+
+        builder.setNegativeButton("Vissza", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                finish();
+            }
+        });
+
+        AlertDialog alert = builder.create();
+        alert.show();*/
+
         String fileuploadsuccess = getResources().getString(R.string.fileUploadSuccess);
         String fileuploaderror = getResources().getString(R.string.fileUploadFailure);
         String back = getResources().getString(R.string.backToPreviousActivity);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Kihívás napja").setCancelable(false);
+        builder.setTitle("Kihívás napja").setCancelable(true);
 
         if (error) {
             builder.setMessage(fileuploaderror);
-            builder.setNegativeButton(back, new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int id) {
-                    finish();
-                }
-            });
-
         } else {
             builder.setMessage(fileuploadsuccess);
         }
+
+        builder.setNeutralButton(back, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                finish();
+            }
+        });
 
         AlertDialog alert = builder.create();
         alert.show();
@@ -281,7 +319,9 @@ public class UploadActivity extends Activity {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        int orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_UNDEFINED);
+        int orientation = exif.getAttributeInt(
+                ExifInterface.TAG_ORIENTATION,
+                ExifInterface.ORIENTATION_UNDEFINED);
 
         Bitmap b = BitmapFactory.decodeFile(filePath);
         Bitmap out = scaleBitmap(b, (b.getWidth() / 3), (b.getHeight() / 3), orientation);
@@ -295,14 +335,13 @@ public class UploadActivity extends Activity {
             fOut.close();
             b.recycle();
             out.recycle();
-
-            progressBarSpinner.setVisibility(View.GONE);
         } catch (Exception e) {
             Log.e("FileOutputStreamError", e.getMessage());
         }
     }
 
-    public Bitmap scaleBitmap(Bitmap bitmapToScale, float newWidth, float newHeight, int orientation) {
+    public Bitmap scaleBitmap(Bitmap bitmapToScale, float newWidth, float newHeight,
+                              int orientation) {
 
         if (bitmapToScale == null)
             return null;
@@ -347,6 +386,7 @@ public class UploadActivity extends Activity {
         matrix.postScale(newWidth / width, newHeight / height);
 
         // recreate the new Bitmap and set it back
-        return Bitmap.createBitmap(bitmapToScale, 0, 0, bitmapToScale.getWidth(), bitmapToScale.getHeight(), matrix, true);
+        return Bitmap.createBitmap(bitmapToScale, 0, 0, bitmapToScale.getWidth(),
+                bitmapToScale.getHeight(), matrix, true);
     }
 }

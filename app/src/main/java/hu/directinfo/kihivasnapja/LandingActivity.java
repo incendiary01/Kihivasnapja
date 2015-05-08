@@ -1,6 +1,8 @@
 package hu.directinfo.kihivasnapja;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -8,14 +10,15 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import java.text.Normalizer;
 
@@ -27,9 +30,16 @@ public class LandingActivity extends ActionBarActivity {
 
     private AutoCompleteTextView cityAutoComplete;
     private ArrayAdapter cities_adapter;
+
     private String selectedCity;
     private String selectedSchool;
+    private String selectedCityAccent;
+    private String selectedSchoolAccent;
+
     public static final String PREFS_NAME = "UserPreferences";
+
+    private CheckBox checkbox;
+    private TextView aszftext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +66,26 @@ public class LandingActivity extends ActionBarActivity {
             handleActionBar();
             fillUpAutocomplete();
 
+            checkbox = (CheckBox) findViewById(R.id.acceptaszf);
+            aszftext = (TextView) findViewById(R.id.aszftext);
 
+            aszftext.setClickable(true);
+
+            aszftext.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    // Start the main activity
+                    Intent intent = new Intent(LandingActivity.this, AszfActivity.class);
+                    startActivity(intent);
+                }
+            });
+
+
+
+            /*checkbox = (CheckBox) findViewById(R.id.acceptaszf);
+            checkbox.setText(Html.fromHtml(checkBoxText));
+            checkbox.setMovementMethod(LinkMovementMethod.getInstance());*/
 
            /* android.support.v7.app.ActionBar actionbar = getSupportActionBar();
             actionbar.setDisplayShowHomeEnabled(true);
@@ -103,21 +132,6 @@ public class LandingActivity extends ActionBarActivity {
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
     public void fillUpAutocomplete() {
 
         // Get the list of cities
@@ -145,6 +159,7 @@ public class LandingActivity extends ActionBarActivity {
             @Override
             public void afterTextChanged(Editable s) {
                 if (checkIfResourceExist(s)) {
+                    saveCityAccent(s);
                     enableSchoolSpinner(s, cityAutoComplete);
                 } else {
                     disableSchoolSpinner();
@@ -153,6 +168,41 @@ public class LandingActivity extends ActionBarActivity {
             }
         });
 
+    }
+
+    private void saveCityAccent(Editable s) {
+
+        String cityAccent = s.toString();
+
+        // Get the shared preferences
+        SharedPreferences.Editor editor = getSharedPreferences(PREFS_NAME, MODE_PRIVATE).edit();
+
+        editor.putString("cityAccent", convertToUTF8(cityAccent));
+
+        editor.commit();
+
+    }
+
+    private void saveSchoolAccent(String s) {
+
+        // Get the shared preferences
+        SharedPreferences.Editor editor = getSharedPreferences(PREFS_NAME, MODE_PRIVATE).edit();
+
+        editor.putString("schoolAccent", s);
+
+        editor.commit();
+
+    }
+
+    // convert from internal Java String format -> UTF-8
+    public static String convertToUTF8(String s) {
+        String out = null;
+        try {
+            out = new String(s.getBytes("UTF-8"), "ISO-8859-2");
+        } catch (java.io.UnsupportedEncodingException e) {
+            return null;
+        }
+        return out;
     }
 
     public void disableSchoolSpinner() {
@@ -218,14 +268,19 @@ public class LandingActivity extends ActionBarActivity {
 
         // Get the array dynamically
         final int getRes = getResources().getIdentifier(city, "array", getPackageName());
-        String[] schools = getResources().getStringArray(getRes);
+//        String[] schools = getResources().getStringArray(getRes);
 
         // Create the adapter
-        final ArrayAdapter schools_adapter =
-                new ArrayAdapter(this, android.R.layout.simple_list_item_1, schools);
+//        final ArrayAdapter schools_adapter =
+//                new ArrayAdapter(this, android.R.layout.simple_list_item_1, schools);
+
+        final ArrayAdapter schools_adapter = ArrayAdapter.createFromResource(
+                this,
+                getRes,
+                R.layout.support_simple_spinner_dropdown_item);
 
         // Set the spinner type
-        schools_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        schools_adapter.setDropDownViewResource(R.layout.spinner_item_layout);
 
         // Set adapter
         spinner.setAdapter(schools_adapter);
@@ -239,6 +294,7 @@ public class LandingActivity extends ActionBarActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
                 String temp_school = (String) schools_adapter.getItem(position);
+                saveSchoolAccent(temp_school);
                 selectedSchool = flattenToAscii(temp_school.toString().toLowerCase());
 
                 Button button = (Button) findViewById(R.id.registerForward);
@@ -285,29 +341,44 @@ public class LandingActivity extends ActionBarActivity {
 
     public void createAndShowAlertDialog(View view) {
 
-        /*AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        boolean isChecked = checkbox.isChecked();
 
-        alertDialogBuilder.setTitle("Figyelem!");
-        alertDialogBuilder.setMessage("Ha egyszer beállította a települését és az iskoláját, később már nem térhet vissza erre a képernyőre. Folytatja?");
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
 
-        alertDialogBuilder.setPositiveButton("Folytatás",new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-                proceedToApp();
-            }
-        });
+        if (isChecked) {
 
-        alertDialogBuilder.setNegativeButton("Mégse", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-            }
-        });
+            alertDialogBuilder.setTitle("Figyelem!");
+            alertDialogBuilder.setMessage("Ha egyszer beállította a települést és az iskolát, később már nem térhet vissza erre a képernyőre. Folytatja?");
 
-        alertDialogBuilder.show();*/
+            alertDialogBuilder.setPositiveButton("Folytatás",new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
+                    proceedToApp();
+                }
+            });
 
-        proceedToApp();
+            alertDialogBuilder.setNegativeButton("Mégse", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
+                }
+            });
+
+        }
+        else
+        {
+            alertDialogBuilder.setTitle("Kihívás Napja");
+            alertDialogBuilder.setMessage("Kérem fogadja el az Általános Szerződési Feltételeket!");
+            alertDialogBuilder.setNeutralButton("OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
+                }
+            });
+        }
+
+        alertDialogBuilder.show();
 
     }
 

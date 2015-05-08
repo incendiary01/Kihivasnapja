@@ -15,7 +15,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import java.io.File;
@@ -27,20 +27,20 @@ import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class MainActivity extends ActionBarActivity {
-	
-	// LogCat tag
-	private static final String TAG = MainActivity.class.getSimpleName();
+
+    // LogCat tag
+    private static final String TAG = MainActivity.class.getSimpleName();
 
     // Camera activity request codes
     private static final int CAMERA_CAPTURE_IMAGE_REQUEST_CODE = 100;
     private static final int CAMERA_CAPTURE_VIDEO_REQUEST_CODE = 200;
-    
+
     public static final int MEDIA_TYPE_IMAGE = 1;
     public static final int MEDIA_TYPE_VIDEO = 2;
 
     private Uri fileUri; // file url to store image/video
-    
-    private Button btnCapturePicture, btnRecordVideo;
+
+    private ImageButton btnCapturePicture;
 
     public static final String PREFS_NAME = "UserPreferences";
 
@@ -56,14 +56,16 @@ public class MainActivity extends ActionBarActivity {
         );
 
         handleActionBar();
-        
+
+        debugSavedPreferences();
+
         // Changing action bar background color
         // These two lines are not needed
         //getActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor(getResources().getString(R.color.action_bar))));
- 
-        btnCapturePicture = (Button) findViewById(R.id.btnCapturePicture);
+
+        btnCapturePicture = (ImageButton) findViewById(R.id.btnCapturePicture);
         //btnRecordVideo = (Button) findViewById(R.id.btnRecordVideo);
- 
+
         /**
          * Capture image button click event
          */
@@ -74,7 +76,7 @@ public class MainActivity extends ActionBarActivity {
                 captureImage();
             }
         });
- 
+
         /**
          * Record video button click event
          */
@@ -86,7 +88,7 @@ public class MainActivity extends ActionBarActivity {
                 recordVideo();
             }
         });*/
- 
+
         // Checking camera availability
         if (!isDeviceSupportCamera()) {
             Toast.makeText(getApplicationContext(),
@@ -116,22 +118,28 @@ public class MainActivity extends ActionBarActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
 
-        MenuItem item = menu.findItem(R.id.action_settings);
+//        MenuItem settings = menu.findItem(R.id.action_settings);
+        MenuItem exit = menu.findItem(R.id.action_exit);
 
-        if (item == null)
-            return true;
+//        if (settings == null)
+//            return true;
+//
+//        settings.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+//            @Override
+//            public boolean onMenuItemClick(MenuItem item) {
+//                showSettings();
+//                return true;
+//            }
+//        });
 
-        item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+        exit.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                switch (item.toString()) {
-                    case "Settings":
-                        showSettings();
-                        break;
-                }
+                finish();
                 return true;
             }
         });
@@ -151,16 +159,20 @@ public class MainActivity extends ActionBarActivity {
         // Get Shared Preferences
         SharedPreferences prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
         String choosenCity = prefs.getString("city", null);
+        String choosenCityAccent = prefs.getString("cityAccent", null);
         String choosenSchool = prefs.getString("school", null);
+        String choosenSchoolAccent = prefs.getString("schoolAccent", null);
 
-        Log.d("City",choosenCity);
-        Log.d("School",choosenSchool);
+        Log.d("City", choosenCity);
+        Log.d("CityAccent", choosenCityAccent);
+        Log.d("School", choosenSchool);
+        Log.d("SchoolAccent", choosenSchoolAccent);
 
     }
- 
+
     /**
      * Checking device has camera hardware or not
-     * */
+     */
     private boolean isDeviceSupportCamera() {
         if (getApplicationContext().getPackageManager().hasSystemFeature(
                 PackageManager.FEATURE_CAMERA)) {
@@ -171,32 +183,32 @@ public class MainActivity extends ActionBarActivity {
             return false;
         }
     }
- 
+
     /**
      * Launching camera app to capture image
      */
-    private void captureImage() {
+    public void captureImage() {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
- 
+
         fileUri = getOutputMediaFileUri(MEDIA_TYPE_IMAGE);
- 
+
         intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
- 
+
         // start the image capture Intent
         startActivityForResult(intent, CAMERA_CAPTURE_IMAGE_REQUEST_CODE);
     }
-    
+
     /**
      * Launching camera app to record video
      */
     private void recordVideo() {
         Intent intent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
- 
+
         fileUri = getOutputMediaFileUri(MEDIA_TYPE_VIDEO);
- 
+
         // set video quality
         intent.putExtra(MediaStore.EXTRA_VIDEO_QUALITY, 1);
- 
+
         intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
 
         // set the image file
@@ -204,7 +216,7 @@ public class MainActivity extends ActionBarActivity {
         // start the video capture Intent
         startActivityForResult(intent, CAMERA_CAPTURE_VIDEO_REQUEST_CODE);
     }
- 
+
     /**
      * Here we store the file url as it will be null after returning from camera
      * app
@@ -212,62 +224,62 @@ public class MainActivity extends ActionBarActivity {
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
- 
+
         // save file url in bundle as it will be null on screen orientation
         // changes
         outState.putParcelable("file_uri", fileUri);
     }
- 
+
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
- 
+
         // get the file url
         fileUri = savedInstanceState.getParcelable("file_uri");
     }
- 
+
     /**
      * Receiving activity result method will be called after closing the camera
-     * */
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         // if the result is capturing Image
         if (requestCode == CAMERA_CAPTURE_IMAGE_REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
-                
-            	// successfully captured the image
+
+                // successfully captured the image
                 // launching upload activity
-            	launchUploadActivity(true);
-            	
-            	
+                launchUploadActivity(true);
+
+
             } else if (resultCode == RESULT_CANCELED) {
-                
-            	// user cancelled Image capture
+
+                // user cancelled Image capture
                 Toast.makeText(getApplicationContext(),
                         "User cancelled image capture", Toast.LENGTH_SHORT)
                         .show();
-            
+
             } else {
                 // failed to capture image
                 Toast.makeText(getApplicationContext(),
                         "Sorry! Failed to capture image", Toast.LENGTH_SHORT)
                         .show();
             }
-        
+
         } else if (requestCode == CAMERA_CAPTURE_VIDEO_REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
-                
-            	// video successfully recorded
+
+                // video successfully recorded
                 // launching upload activity
-            	launchUploadActivity(false);
-            
+                launchUploadActivity(false);
+
             } else if (resultCode == RESULT_CANCELED) {
-                
-            	// user cancelled recording
+
+                // user cancelled recording
                 Toast.makeText(getApplicationContext(),
                         "User cancelled video recording", Toast.LENGTH_SHORT)
                         .show();
-            
+
             } else {
                 // failed to record video
                 Toast.makeText(getApplicationContext(),
@@ -276,38 +288,38 @@ public class MainActivity extends ActionBarActivity {
             }
         }
     }
-    
-    private void launchUploadActivity(boolean isImage){
 
-        getCameraPhotoOrientation(this,fileUri,fileUri.getPath());
+    private void launchUploadActivity(boolean isImage) {
 
-    	Intent i = new Intent(MainActivity.this, UploadActivity.class);
+        getCameraPhotoOrientation(this, fileUri, fileUri.getPath());
+
+        Intent i = new Intent(MainActivity.this, UploadActivity.class);
         i.putExtra("filePath", fileUri.getPath());
         i.putExtra("isImage", isImage);
         startActivity(i);
     }
-     
+
     /**
      * ------------ Helper Methods ----------------------
      */
- 
+
     /**
      * Creating file uri to store image/video
      */
     public Uri getOutputMediaFileUri(int type) {
         return Uri.fromFile(getOutputMediaFile(type));
     }
- 
+
     /**
      * returning image / video
      */
     private static File getOutputMediaFile(int type) {
- 
+
         // External sdcard location
         File mediaStorageDir = new File(
                 Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),
                 Config.IMAGE_DIRECTORY_NAME);
- 
+
         // Create the storage directory if it does not exist
         if (!mediaStorageDir.exists()) {
             if (!mediaStorageDir.mkdirs()) {
@@ -316,7 +328,7 @@ public class MainActivity extends ActionBarActivity {
                 return null;
             }
         }
- 
+
         // Create a media file name
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss",
                 Locale.getDefault()).format(new Date());
@@ -330,11 +342,11 @@ public class MainActivity extends ActionBarActivity {
         } else {
             return null;
         }
- 
+
         return mediaFile;
     }
 
-    public static int getCameraPhotoOrientation(Context context, Uri imageUri, String imagePath){
+    public static int getCameraPhotoOrientation(Context context, Uri imageUri, String imagePath) {
         int rotate = 0;
         try {
             context.getContentResolver().notifyChange(imageUri, null);

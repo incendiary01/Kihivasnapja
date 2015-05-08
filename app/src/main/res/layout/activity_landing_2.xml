@@ -4,6 +4,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@drawable/background"
+    android:baselineAligned="false"
     android:orientation="vertical">
 
     <LinearLayout
@@ -26,11 +27,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
+            android:src="@drawable/landing_page_image"
             android:paddingTop="0dp"
             android:paddingLeft="20dp"
             android:paddingRight="20dp"
-            android:paddingBottom="20dp"
-            android:src="@drawable/landing_page_image" />
+            android:paddingBottom="20dp" />
 
         <AutoCompleteTextView
             android:id="@+id/cityAutoComplete"
@@ -38,7 +39,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal|bottom"
             android:completionThreshold="1"
-            android:hint="@string/choose_your_city"
+            android:hint="Válaszd ki a városodat"
             android:singleLine="true"
             android:layout_marginTop="0dp"
             android:layout_marginRight="20dp"
@@ -52,7 +53,7 @@
             android:gravity="left"
             android:labelFor="@+id/schoolAutoComplete"
             android:paddingLeft="25dp"
-            android:text="@string/choose_your_facility"
+            android:text="Válaszd ki az iskoládat"
             android:textAlignment="center"
             android:textColor="@color/action_bar"
             android:textSize="18dp" />
@@ -60,7 +61,7 @@
         <Spinner
             android:id="@+id/schoolSpinner"
             android:layout_width="match_parent"
-            android:layout_height="36dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_margin="20dp"
             android:layout_weight="0"
@@ -88,9 +89,9 @@
                 android:textColor="@color/action_bar"
                 android:elegantTextHeight="true"
                 android:text="Elfogadom az Általános Szerződési Feltételeket"
-                android:singleLine="true"
                 android:id="@+id/aszftext"
-                android:textSize="10dp" />
+                android:textSize="10dp"
+                android:singleLine="true" />
 
         </LinearLayout>
 
@@ -101,9 +102,9 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_weight="0"
-            android:enabled="false"
+            android:enabled="true"
             android:onClick="createAndShowAlertDialog"
-            android:text="TOVÁBB"
+            android:text="@string/next"
             android:singleLine="true"
             android:textColor="@color/white" />
 
